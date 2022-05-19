@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import './index.css';
-import Login from './components/Login/Login'
+import Router from './components/Router/Router';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Login />
+    <Router />
   </React.StrictMode>
 );
 
