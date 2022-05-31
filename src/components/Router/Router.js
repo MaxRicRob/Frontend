@@ -7,7 +7,6 @@ function Router() {
   const baseUrl = "";
 
   return (
-
     <BrowserRouter>
       <Routes>
         <Route
