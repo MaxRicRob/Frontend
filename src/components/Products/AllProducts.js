@@ -29,7 +29,7 @@ const AllProducts = (props) => {
                             setError(error);
                         }
                     }
-                );}getProducts();}, 500000);
+                );}getProducts();}, 5000);
         return () => (mounted = false); //cleanup function
     }, [products, baseURL])
 
@@ -44,7 +44,7 @@ const AllProducts = (props) => {
                     products.map(
                         (product) =>{
                             return(
-                            <div key={product.id}>
+                            <div className="p-10 border-2 border-solid m-4 w-80">
                                 <h5>{product.name}</h5>
                             </div>
                             )})): (<p>Empty. No Products available.</p>)}
