@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from '../Login/LoginPage';
+import Login from '../Login/Login';
+import AllProducts from '../Products/AllProducts';
 
 function Router() {
 
-  const baseUrl = "";
+  const baseURL = "http://localhost:3002";
 
   return (
     <BrowserRouter>
@@ -12,8 +13,16 @@ function Router() {
         <Route
           exact
           path="/"
-          element={<LoginPage
-            baseUrl={baseUrl} />}
+          element={<Login
+            baseURL={baseURL} 
+            />}
+        />
+        <Route
+          exact
+          path="/"
+          element={<AllProducts
+            baseURL={baseURL} 
+            />}
         />
       </Routes>
     </BrowserRouter>
