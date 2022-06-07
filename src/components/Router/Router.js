@@ -19,7 +19,7 @@ function Router() {
         />
         <Route
           exact
-          path="/"
+          path="/products"
           element={<AllProducts
             baseURL={baseURL} 
             />}
