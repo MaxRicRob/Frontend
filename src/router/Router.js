@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from '../Login/Login';
-import AllProducts from '../Products/AllProducts';
+import Login from '../pages/Login';
+import AllProducts from '../pages/AllProducts';
 
 function Router() {
 

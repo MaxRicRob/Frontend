@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import fruitImg from "../../img/fruits.jpg";
+import fruitImg from "../img/fruits.jpg";
 
 function Login(props) {
 
