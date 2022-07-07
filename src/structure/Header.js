@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Grid, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const Header = () => {
