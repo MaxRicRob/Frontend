@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     return(
-        <AppBar position="fixed" color="success">
+        <AppBar 
+        position="fixed" 
+        sx={{bgcolor: 'secondary.main'}}
+        >
             <Toolbar >
                 <Typography component={Link}
                     to="/"
                     variant="h5"
-                    ml={5}>
+                    ml={5}
+                    fontWeight="bold">
                     Fruitilicious
                 </Typography>
                 <Grid
