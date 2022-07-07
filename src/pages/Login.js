@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import fruitImg from "../img/fruits.jpg";
+import { Box } from "@mui/system";
+import {Typography, Button, TextField} from '@mui/material';
 
 function Login(props) {
 
@@ -17,33 +19,53 @@ function Login(props) {
     setPassword(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
   // login functionality to be implemented once real backend is there - post request with checkLogin-Logic
 
   return (
-    <body class="h-screen bg-stone-300 font-sans">
-      <div class="flex shadow-md absolute inset-40 bg-green-300 rounded-lg overflow-hidden">
+
+    <body class="h-screen bg-stone-200 ">
+      <div class="flex shadow-md absolute inset-40 bg-green-100 rounded-lg overflow-hidden min-w-fit">
         <div class="shrink-0">
           <img src={fruitImg} alt="fruits"/>
         </div>
         <div class="grid auto-rows-max ml-20 mt-40">
-        <p class="mb-10 font-bold text-lg">Welcome to Fruitilicious!</p>
-          <div>E-Mail: 
-            <input 
-            class="border-2 hover:border-green-500 focus:outline-none rounded-md ml-9 mb-5 h-10"
-            type="email"
-            value={email}
-            onChange={emailOnChange}></input>
-            </div>          
-          <div>Password: 
-            <input 
-            class="border-2 hover:border-green-500 focus:outline-none rounded-md ml-3.5 mb-5 h-10"
-            type="password"
-            value={password}
-            onChange={passwordOnChange}></input>
-            </div>
-          <div>
-            <button class="cursor-pointer rounded-full w-20 h-10 bg-green-500 hover:bg-green-400">Login</button>
-            </div>
+        <Typography variant="h5" mb={3}>
+          Welcome to Fruitilicious!
+        </Typography>
+           <Box onSubmit={handleSubmit} noValidate>
+             <TextField
+              margin="normal"
+              required
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              color="success"
+            /><br/>
+            <TextField
+              margin="normal"
+              required
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              color="success"
+            /><br/>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              color="success"
+            >
+              Sign In
+            </Button>
+            </Box>
         </div>
       </div>
     </body>
