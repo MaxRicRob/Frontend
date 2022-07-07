@@ -11,36 +11,10 @@ const LandingPage = (props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        let mounted = true;
-
-        setTimeout(() => {
-            async function getProducts() {
-                fetch(`${baseURL}/products`,{
-                    method: "GET",
-                    credentials: "include",
-                }).then((res) => res.json())
-                .then(
-                    (result) =>{
-                        if(mounted){
-                            setIsLoaded(true);
-                            setProducts(result);
-                        }
-                    },
-                    (error) =>{
-                        if(mounted){
-                            setIsLoaded(true);
-                            setError(error);
-                        }
-                    }
-                );}getProducts();}, 5000);
-        return () => (mounted = false); //cleanup function
-    }, [products, baseURL])
-
     return(
         <div>
            <Header/>
-            <AllProducts/>
+            <AllProducts baseURL={baseURL}/>
            <Footer/>
         </div>
     )

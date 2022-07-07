@@ -1,30 +1,29 @@
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from "@mui/material";
+import { Card, CardMedia, CardContent, CardActions, CardActionArea, Typography, Button } from "@mui/material";
 
-const Product = () => {
+const Product = ({product}) => {
     return(
         <Card>
-            <CardMedia
-            title="Test"/>
-                <CardContent>
-                    <div>
-                      <Typography variant="h5" gutterBottom>
-                        Name
-                      </Typography>
-                      <Typography variant="h5">
-                        Price
-                      </Typography>
-                    </div>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                    >Description
-                    </Typography>
-                </CardContent>
+            <CardActionArea>
+                <CardMedia
+                title="Test"/>
+                    <CardContent>
+                        <div>
+                        <Typography variant="h6" gutterBottom>
+                            {product.name}
+                        </Typography>
+                        <Typography variant="h6">
+                          Price
+                        </Typography>
+                        </div>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                        >Description
+                        </Typography>
+                    </CardContent>
+            </CardActionArea>
             <CardActions disableSpacing>
-            <IconButton
-            aria-label="Add to Cart"
-            >
-            </IconButton>
+                <Button>Add to Cart</Button>
             </CardActions>
         </Card>
     )
