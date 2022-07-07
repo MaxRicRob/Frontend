@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
-import AllProducts from '../pages/AllProducts';
+import LandingPage from '../pages/LandingPage';
 
 function Router() {
 
@@ -12,15 +12,15 @@ function Router() {
       <Routes>
         <Route
           exact
-          path="/"
+          path="/login"
           element={<Login
             baseURL={baseURL} 
             />}
         />
         <Route
           exact
-          path="/products"
-          element={<AllProducts
+          path="/"
+          element={<LandingPage
             baseURL={baseURL} 
             />}
         />

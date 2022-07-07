@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import fruitImg from "../img/fruits.jpg";
 import { Box } from "@mui/system";
-import {Typography, Button, TextField} from '@mui/material';
+import {Typography, Button, TextField, Link} from '@mui/material';
 
 function Login(props) {
 
@@ -27,13 +27,13 @@ function Login(props) {
 
   return (
 
-    <body class="h-screen bg-stone-200 ">
-      <div class="flex shadow-md absolute inset-40 bg-green-100 rounded-lg overflow-hidden min-w-fit">
+    <body class="h-screen bg-stone-200 bg-cover">
+      <div class="flex shadow-lg absolute inset-40 bg-green-100 rounded-xl overflow-hidden min-w-fit">
         <div class="shrink-0">
           <img src={fruitImg} alt="fruits"/>
         </div>
         <div class="grid auto-rows-max ml-20 mt-40">
-        <Typography variant="h5" mb={3}>
+        <Typography variant="h5" mb={3} fontWeight="bold">
           Welcome to Fruitilicious!
         </Typography>
            <Box onSubmit={handleSubmit} noValidate>
@@ -65,6 +65,10 @@ function Login(props) {
             >
               Sign In
             </Button>
+            <br/>
+            <Link href="#" variant="body1" color="#357a38">
+                  {"Don't have an account? Sign Up"}
+            </Link>
             </Box>
         </div>
       </div>

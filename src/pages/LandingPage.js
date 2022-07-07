@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
+import { CircularProgress } from "@mui/material";
+import Header from "../structure/Header";
 
-const AllProducts = (props) => {
+const LandingPage = (props) => {
     const baseURL = props.baseURL;
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -33,24 +35,11 @@ const AllProducts = (props) => {
         return () => (mounted = false); //cleanup function
     }, [products, baseURL])
 
-    if (error){
-        return <div>Error: {error.message}</div>
-    } else if(!isLoaded){
-        return <div className="loading-screen">Loading Products...</div>
-    } else{
-        return(
-            <div>
-                {!_.isEmpty(products) ? (
-                    products.map(
-                        (product) =>{
-                            return(
-                            <div className="p-10 border-2 border-solid m-4 w-80">
-                                <h5>{product.name}</h5>
-                            </div>
-                            )})): (<p>Empty. No Products available.</p>)}
-            </div>
-        )
-    }
+    return(
+        <div>
+           <Header/>
+        </div>
+    )
 }
 
-export default AllProducts;
+export default LandingPage;
