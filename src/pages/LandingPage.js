@@ -3,6 +3,7 @@ import _ from "lodash";
 import { CircularProgress } from "@mui/material";
 import Header from "../structure/Header";
 import Footer from "../structure/Footer";
+import AllProducts from "../products/AllProducts";
 
 const LandingPage = (props) => {
     const baseURL = props.baseURL;
@@ -39,6 +40,7 @@ const LandingPage = (props) => {
     return(
         <div>
            <Header/>
+            <AllProducts/>
            <Footer/>
         </div>
     )
