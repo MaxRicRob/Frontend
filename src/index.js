@@ -8,6 +8,7 @@ const theme = createTheme({
   palette: {
     secondary: {
       main: colors.lightGreen[800],
+      footer: colors.grey[200],
     },
   }
 })

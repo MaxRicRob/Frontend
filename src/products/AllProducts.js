@@ -35,19 +35,21 @@ const AllProducts = (props) => {
         return () => (mounted = false); //cleanup function
     }, [products, props.baseURL])
 
-    // console.log(products)
-
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <CircularProgress/>
+      return(
+      <Box textAlign="center" mt={15}>
+        <CircularProgress centered/>
+      </Box>
+        )
     } else {
     return(
-        <Grid container justify="center" spacing={4}>
+        <Grid container justify="center">
         {products.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-            <Box mt={10} ml={10}>
-            <Product product={product}/>
+          <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
+            <Box mt={12} ml={10} mr={10}>
+              <Product product={product}/>
             </Box>
           </Grid>
         ))} 

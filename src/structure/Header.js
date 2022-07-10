@@ -24,7 +24,7 @@ const Header = () => {
             >
                 <Grid item>
                 <Typography component={Link}
-                    to="/products"
+                    to="/"
                     variant="h6">
                     Products
                 </Typography>
