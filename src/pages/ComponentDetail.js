@@ -51,9 +51,13 @@ const ComponentDetail = (props) => {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return(
-      <Box textAlign="center" mt={15}>
-        <CircularProgress centered/>
-      </Box>
+        <div>
+            <Header/>
+                <Box textAlign="center" mt={15}>
+                <CircularProgress centered/>
+                </Box>
+            <Footer/>
+        </div>    
         )
     } else {
     return ( 
