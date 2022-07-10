@@ -45,7 +45,7 @@ const AllProducts = (props) => {
         )
     } else {
     return(
-        <Grid container justify="center">
+      <Grid container justify="center">
         {products.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
             <Box mt={12} ml={10} mr={10}>

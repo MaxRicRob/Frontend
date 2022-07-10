@@ -1,6 +1,6 @@
 import Header from "../structure/Header";
 import Footer from "../structure/Footer";
-import AllProducts from "../products/AllProducts";
+import AllProducts from "../components/AllProducts";
 
 const LandingPage = (props) => {
     const baseURL = props.baseURL;
