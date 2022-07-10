@@ -1,19 +1,19 @@
-import { Card, CardMedia, CardContent, CardActions, CardActionArea, Typography, Button } from "@mui/material";
+import { Card, CardContent, CardActions, CardActionArea, Typography, Button } from "@mui/material";
 
 const Product = ({product}) => {
     return(
         <Card>
             <CardActionArea>
-                <CardMedia
-                title="Test"/>
                     <CardContent>
                         <div>
                         <Typography variant="h6" gutterBottom>
                             {product.name}
                         </Typography>
+                            <div style={{textAlign: 'right'}}>
                         <Typography variant="h6">
                           Price
                         </Typography>
+                            </div>
                         </div>
                         <Typography
                           variant="body2"
