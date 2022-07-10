@@ -42,7 +42,7 @@ const ProductDetail = (props) => {
                 }
               );
           }; 
-        getProduct();},100);
+        getProduct();},2000);
         return () => (mounted = false); //cleanup function
     },[product, baseURL, id])
         

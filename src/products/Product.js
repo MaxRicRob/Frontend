@@ -1,9 +1,13 @@
 import { Card, CardContent, CardActions, CardActionArea, Typography, Button } from "@mui/material";
+import { useNavigate } from 'react-router';
 
 const Product = ({product}) => {
+    
+    let navigate = useNavigate();
+
     return(
         <Card>
-            <CardActionArea>
+            <CardActionArea onClick={() => {navigate(`/product/${product.id}`)}}>
                     <CardContent>
                         <div>
                         <Typography variant="h6" gutterBottom>
