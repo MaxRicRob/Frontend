@@ -23,6 +23,10 @@ const Header = () => {
               alignItems="center"
             >
                 <Grid item>
+                    Switch Currency     
+                    {/* to be implemented */}
+                </Grid>
+                <Grid item>
                 <Typography component={Link}
                     to="/"
                     variant="h6">
