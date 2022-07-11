@@ -1,11 +1,9 @@
-import Header from "../structure/Header";
-import Footer from "../structure/Footer";
-import AllComponents from "../components/AllComponents";
+import Header from "../structure/Header"
+import Footer from "../structure/Footer"
+import AllComponents from "../components/AllComponents"
 
 const ComponentsPage = (props) => {
-    
-    const baseURL = props.baseURL;
-
+    const baseURL = props.baseURL
     return ( 
         <div>
            <Header isLoggedIn={props.isLoggedIn}/>

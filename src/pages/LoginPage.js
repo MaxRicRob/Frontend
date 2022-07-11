@@ -4,7 +4,7 @@ import { Box } from "@mui/system"
 import {Typography, Button, TextField, Link} from '@mui/material'
 import fruitImg from "../img/fruits.jpg";
 
-function Login(props) {
+function LoginPage(props) {
 
   let navigate = useNavigate()
   const baseURL = props.baseURL
@@ -96,4 +96,4 @@ function Login(props) {
   );
 }
 
-export default Login
+export default LoginPage

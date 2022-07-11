@@ -1,6 +1,6 @@
-import { AppBar, Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { AppBar, Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material"
+import { Link } from "react-router-dom"
+import { useState } from "react"
 import ProfileMenu from "./ProfileMenu"
 
 const Header = (props) => {
@@ -30,20 +30,19 @@ const Header = (props) => {
           value: 'POUND',
           label: '£',
         }
-      ];
+      ]
 
-    const [currency, setCurrency] = useState('EUR');
+    const [currency, setCurrency] = useState('EUR')
 
     const currencyChangeHandler = (e) => {
-        const enteredCurrency = e.target.value;
-        setCurrency(enteredCurrency);
+        const enteredCurrency = e.target.value
+        setCurrency(enteredCurrency)
     }
 
     return(
         <AppBar 
         position="fixed" 
-        sx={{bgcolor: 'secondary.main'}}
-        >
+        sx={{bgcolor: 'secondary.main'}}>
             <Toolbar >
                 <Typography component={Link}
                     to="/"
@@ -57,8 +56,7 @@ const Header = (props) => {
               spacing={6}
               direction="row"
               justifyContent="flex-end"
-              alignItems="center"
-            >
+              alignItems="center">
                 <Grid item>
                     <TextField 
                     id="standard-select-currency-native"
@@ -67,8 +65,7 @@ const Header = (props) => {
                     onChange={currencyChangeHandler}
                     variant="standard"
                     color="success"
-                    sx={{ color: 'white'}}
-                    >
+                    sx={{ color: 'white'}}>
                       {currencies.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
                           {option.label}
@@ -99,4 +96,4 @@ const Header = (props) => {
     )
 }
 
-export default Header;
+export default Header

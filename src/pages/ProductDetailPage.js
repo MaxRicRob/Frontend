@@ -1,28 +1,23 @@
-import Header from "../structure/Header";
-import Footer from "../structure/Footer";
-import { 
-    Box, 
-    Card, 
-    CardContent, 
-    CircularProgress, 
-    Typography} from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import Header from "../structure/Header"
+import Footer from "../structure/Footer"
+import { Box, Card, CardContent, CircularProgress, Typography} from "@mui/material"
+import React, { useState, useEffect } from "react"
+import { useParams } from "react-router"
 
-const ProductDetail = (props) => {
-    const baseURL = props.baseURL;
+const ProductDetailPage = (props) => {
+    const baseURL = props.baseURL
 
-    const [product, setProduct] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);    
-    const [error, setError] = useState(null);
+    const [product, setProduct] = useState([])
+    const [isLoaded, setIsLoaded] = useState(false)    
+    const [error, setError] = useState(null)
 
-    const { id } = useParams(); //gets id from current route
+    const { productID } = useParams() //gets productID from current route
 
     useEffect(() => {
-        let mounted = true;
+        let mounted = true
         setTimeout(() => {
           async function getProduct() {
-            fetch(`${baseURL}/products/${id}`, {
+            fetch(`${baseURL}/products/${productID}`, {
               method: "GET",
               credentials: "include",
             })
@@ -30,25 +25,25 @@ const ProductDetail = (props) => {
               .then(
                 (result) => {
                   if (mounted) {
-                    setIsLoaded(true);
-                    setProduct(result);
+                    setIsLoaded(true)
+                    setProduct(result)
                   }
                 },
                 (error) => {
                   if (mounted) {
-                    setIsLoaded(true);
-                    setError(error);
+                    setIsLoaded(true)
+                    setError(error)
                   }
                 }
-              );
-          }; 
-        getProduct();},2000);
-        return () => (mounted = false); //cleanup function
-    },[product, baseURL, id])
+              )
+          } 
+        getProduct()},2000)
+        return () => (mounted = false) //cleanup function
+    },[product, baseURL, productID])
         
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
       return(
         <div>
@@ -91,7 +86,7 @@ const ProductDetail = (props) => {
             </Box>
             <Footer/>
         </div>
-     );}
+     )}
 }
  
-export default ProductDetail;
+export default ProductDetailPage

@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from '../pages/LoginPage';
-import LandingPage from '../pages/LandingPage';
-import ProductDetail from '../pages/ProductDetail';
+import LoginPage from '../pages/LoginPage';
+import ProductsPage from '../pages/ProductsPage';
+import ProductDetailPage from '../pages/ProductDetailPage';
 import ComponentsPage from '../pages/ComponentsPage';
-import ComponentDetail from '../pages/ComponentDetail';
+import ComponentDetailPage from '../pages/ComponentDetailPage';
+import UserProductsPage from '../pages/UserProductsPage';
 
 function Router(props, {setIsLoggedIn}) {
 
@@ -16,7 +17,7 @@ function Router(props, {setIsLoggedIn}) {
         <Route
           exact
           path="/"
-          element={<LandingPage
+          element={<ProductsPage
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
@@ -24,7 +25,7 @@ function Router(props, {setIsLoggedIn}) {
         <Route
           exact
           path="/login"
-          element={<Login
+          element={<LoginPage
             setIsLoggedIn={setIsLoggedIn}
             baseURL={baseURL} 
             />}
@@ -32,7 +33,7 @@ function Router(props, {setIsLoggedIn}) {
         <Route
           exact
           path="/product/:id"
-          element={<ProductDetail
+          element={<ProductDetailPage
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
@@ -48,7 +49,15 @@ function Router(props, {setIsLoggedIn}) {
         <Route
           exact
           path="/component/:id"
-          element={<ComponentDetail
+          element={<ComponentDetailPage
+            isLoggedIn={props.isLoggedIn}
+            baseURL={baseURL} 
+            />}
+        />
+        <Route
+          exact
+          path="/userproducts/:id"
+          element={<UserProductsPage
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}

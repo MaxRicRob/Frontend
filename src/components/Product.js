@@ -1,9 +1,9 @@
-import { Card, CardContent, CardActions, CardActionArea, Typography, Button } from "@mui/material";
-import { useNavigate } from 'react-router';
+import { Card, CardContent, CardActions, CardActionArea, Typography, Button } from "@mui/material"
+import { useNavigate } from 'react-router'
 
 const Product = ({product}) => {
     
-    let navigate = useNavigate();
+    let navigate = useNavigate()
 
     return(
         <Card>
@@ -30,4 +30,4 @@ const Product = ({product}) => {
     )
 }
 
-export default Product;
+export default Product

@@ -2,16 +2,14 @@ import Header from "../structure/Header";
 import Footer from "../structure/Footer";
 import AllProducts from "../components/AllProducts";
 
-const LandingPage = (props) => {
-    const baseURL = props.baseURL;
-
+const ProductsPage = (props) => {
     return(
         <div>
            <Header isLoggedIn={props.isLoggedIn}/>
-            <AllProducts baseURL={baseURL}/>
+            <AllProducts baseURL={props.baseURL}/>
            <Footer/>
         </div>
     )
 }
 
-export default LandingPage;
+export default ProductsPage;

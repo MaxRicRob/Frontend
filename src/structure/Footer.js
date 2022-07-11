@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material"
 
 const Footer = () => {
     return(
@@ -15,4 +15,4 @@ const Footer = () => {
     )
 }
 
-export default Footer;
+export default Footer

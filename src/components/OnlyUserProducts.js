@@ -1,19 +1,22 @@
-import { Grid, Box, CircularProgress } from "@mui/material"
+import { Box, CircularProgress, Grid} from "@mui/material"
 import Product from "./Product"
 import { useState, useEffect } from 'react'
 import _ from "lodash"
+import { useParams } from "react-router"
 
-const AllProducts = (props) => {
+const OnlyUserProducts = (props) => {
 
-    const [products, setProducts] = useState([])
+    const baseURL = props.baseURL
+    const [userProducts, setUserProducts] = useState([])
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
+    const { userID } = useParams() //gets userID from current route
 
     useEffect(() => {
         let mounted = true
         setTimeout(() => {
-            async function getProducts() {
-                fetch(`${props.baseURL}/products`,{
+            async function getProductsOfUserByID() {
+                fetch(`${baseURL}/userproducts/${userID}`,{
                     method: "GET",
                     credentials: "include",
                 }).then((res) => res.json())
@@ -21,7 +24,8 @@ const AllProducts = (props) => {
                     (result) =>{
                         if(mounted){
                             setIsLoaded(true)
-                            setProducts(result)
+                            setUserProducts(result)
+                            console.log("result: "+result.name) // undefined..
                         }
                     },
                     (error) =>{
@@ -31,32 +35,34 @@ const AllProducts = (props) => {
                         }
                     }
                 )}
-                getProducts()}, 2000)
+                getProductsOfUserByID()}, 2000)
         return () => (mounted = false) //cleanup function
-    }, [products, props.baseURL])
+    }, [userProducts, props.baseURL])
 
     if (error) {
-      return <div>Error: {error.message}</div>
+        return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
       return(
-      <Box textAlign="center" mt={15}>
-        <CircularProgress 
-        centered
-        sx={{ color: 'secondary.loading' }}/>
-      </Box>
-        )
+        <div>
+          <Box textAlign="center" mt={15}>
+            <CircularProgress 
+            centered
+            sx={{ color: 'secondary.loading' }}/>
+          </Box>
+      </div>)
     } else {
-    return(
-      <Grid container justify="center">
-        {products.map((product) => (
+    return ( 
+        <Grid container justify="center">
+        {userProducts.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
             <Box mt={12} ml={5} mr={5}>
-              <Product product={product}/>
+                {product}
+              {/* <Product product={product}/> */}
             </Box>
           </Grid>
         ))} 
       </Grid>
-    )}
+     )}
 }
 
-export default AllProducts
+export default OnlyUserProducts
