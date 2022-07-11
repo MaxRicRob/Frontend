@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
-import { AccountCircle } from "@mui/icons-material"
 import { useState } from "react";
+import ProfileMenu from "./ProfileMenu"
 
 const Header = (props) => {
 
@@ -90,8 +90,8 @@ const Header = (props) => {
                     Components
                 </Typography>
                 </Grid>
-                <Grid item mr={3} mb={1}>
-                <AccountCircle/>  
+                <Grid item mr={3}>
+                <ProfileMenu/>
                 </Grid>
             </Grid>
             </Toolbar>
