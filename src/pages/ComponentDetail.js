@@ -54,7 +54,9 @@ const ComponentDetail = (props) => {
         <div>
             <Header/>
                 <Box textAlign="center" mt={15}>
-                <CircularProgress centered/>
+                <CircularProgress 
+                centered
+                sx={{ color: 'secondary.loading' }}/>
                 </Box>
             <Footer/>
         </div>    

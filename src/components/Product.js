@@ -26,9 +26,6 @@ const Product = ({product}) => {
                         </Typography>
                     </CardContent>
             </CardActionArea>
-            <CardActions disableSpacing>
-                <Button>Add to Cart</Button>
-            </CardActions>
         </Card>
     )
 }

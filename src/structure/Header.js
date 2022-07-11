@@ -1,8 +1,44 @@
-import { AppBar, Toolbar, Typography, Grid } from "@mui/material";
+import { AppBar, Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AccountCircle } from "@mui/icons-material"
+import { useState } from "react";
 
 const Header = (props) => {
+
+    const currencies = [
+        {
+          value: 'USD',
+          label: '$',
+        },
+        {
+          value: 'EUR',
+          label: '€',
+        },
+        {
+          value: 'MXN',
+          label: 'MX$',
+        },
+        {
+          value: 'CAD',
+          label: 'CA$',
+        },
+        {
+          value: 'YEN',
+          label: '¥',
+        },
+        {
+          value: 'POUND',
+          label: '£',
+        }
+      ];
+
+    const [currency, setCurrency] = useState('EUR');
+
+    const currencyChangeHandler = (e) => {
+        const enteredCurrency = e.target.value;
+        setCurrency(enteredCurrency);
+    }
+
     return(
         <AppBar 
         position="fixed" 
@@ -24,8 +60,21 @@ const Header = (props) => {
               alignItems="center"
             >
                 <Grid item>
-                    Switch Currency     
-                    {/* to be implemented */}
+                    <TextField 
+                    id="standard-select-currency-native"
+                    select
+                    value={currency}
+                    onChange={currencyChangeHandler}
+                    variant="standard"
+                    color="success"
+                    sx={{ color: 'white'}}
+                    >
+                      {currencies.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                 </Grid>
                 <Grid item>
                 <Typography component={Link}
@@ -41,16 +90,8 @@ const Header = (props) => {
                     Components
                 </Typography>
                 </Grid>
-                <Grid item>
-                {(props.isLoggedIn)?
-                <AccountCircle/>   
-                : <Typography component={Link}
-                    to="/login"
-                    variant="h6"
-                    mr={6}
-                    ml={3}>
-                    Login
-                </Typography>}
+                <Grid item mr={3} mb={1}>
+                <AccountCircle/>  
                 </Grid>
             </Grid>
             </Toolbar>

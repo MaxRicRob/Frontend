@@ -40,7 +40,9 @@ const AllComponents = (props) => {
       } else if (!isLoaded) {
         return(
         <Box textAlign="center" mt={15}>
-          <CircularProgress centered/>
+          <CircularProgress 
+          centered
+          sx={{ color: 'secondary.loading' }}/>
         </Box>
           )
       } else {
@@ -48,7 +50,7 @@ const AllComponents = (props) => {
         <Grid container justify="center">
         {components.map((component) => (
           <Grid item key={component.id} xs={12} sm={6} md={4} lg={4}>
-            <Box mt={12} ml={10} mr={10}>
+            <Box mt={12} ml={5} mr={5}>
               <Component component={component}/>
             </Box>
           </Grid>

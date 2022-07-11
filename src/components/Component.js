@@ -26,9 +26,6 @@ const Component = ({component}) => {
                     </Typography>
                 </CardContent>
         </CardActionArea>
-        <CardActions disableSpacing>
-            <Button>Add to Cart</Button>
-        </CardActions>
     </Card>
      );
 }

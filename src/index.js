@@ -7,8 +7,10 @@ import { createTheme, colors, ThemeProvider } from '@mui/material';
 const theme = createTheme({
   palette: {
     secondary: {
-      main: colors.lightGreen[800],
+      main: colors.lightGreen[700],
       footer: colors.grey[200],
+      header: colors.lightGreen[50],
+      loading: colors.lightGreen[400],
     },
   }
 })
