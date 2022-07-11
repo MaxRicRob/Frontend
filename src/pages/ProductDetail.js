@@ -61,7 +61,7 @@ const ProductDetail = (props) => {
     } else {
     return ( 
         <div>
-            <Header/>
+            <Header isLoggedIn={props.isLoggedIn}/>
             <Box mt={12} ml={10} mr={10}>
                 <Card>
                     <CardContent>

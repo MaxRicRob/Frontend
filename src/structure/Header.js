@@ -1,7 +1,8 @@
 import { AppBar, Toolbar, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import { AccountCircle } from "@mui/icons-material"
 
-const Header = () => {
+const Header = (props) => {
     return(
         <AppBar 
         position="fixed" 
@@ -41,13 +42,15 @@ const Header = () => {
                 </Typography>
                 </Grid>
                 <Grid item>
-                <Typography component={Link}
+                {(props.isLoggedIn)?
+                <AccountCircle/>   
+                : <Typography component={Link}
                     to="/login"
                     variant="h6"
                     mr={6}
                     ml={3}>
                     Login
-                </Typography>
+                </Typography>}
                 </Grid>
             </Grid>
             </Toolbar>

@@ -6,7 +6,7 @@ import ProductDetail from '../pages/ProductDetail';
 import ComponentsPage from '../pages/ComponentsPage';
 import ComponentDetail from '../pages/ComponentDetail';
 
-function Router() {
+function Router(props, {setIsLoggedIn}) {
 
   const baseURL = "http://localhost:3002";
 
@@ -17,6 +17,7 @@ function Router() {
           exact
           path="/"
           element={<LandingPage
+            isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
         />
@@ -24,6 +25,7 @@ function Router() {
           exact
           path="/login"
           element={<Login
+            setIsLoggedIn={setIsLoggedIn}
             baseURL={baseURL} 
             />}
         />
@@ -31,6 +33,7 @@ function Router() {
           exact
           path="/product/:id"
           element={<ProductDetail
+            isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
         />
@@ -38,6 +41,7 @@ function Router() {
           exact
           path="/components"
           element={<ComponentsPage
+            isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
         />
@@ -45,6 +49,7 @@ function Router() {
           exact
           path="/component/:id"
           element={<ComponentDetail
+            isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
         />

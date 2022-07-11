@@ -8,7 +8,7 @@ const ComponentsPage = (props) => {
 
     return ( 
         <div>
-           <Header/>
+           <Header isLoggedIn={props.isLoggedIn}/>
             <AllComponents baseURL={baseURL}/>
            <Footer/>
         </div>

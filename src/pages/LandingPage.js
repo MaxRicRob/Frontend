@@ -7,7 +7,7 @@ const LandingPage = (props) => {
 
     return(
         <div>
-           <Header/>
+           <Header isLoggedIn={props.isLoggedIn}/>
             <AllProducts baseURL={baseURL}/>
            <Footer/>
         </div>

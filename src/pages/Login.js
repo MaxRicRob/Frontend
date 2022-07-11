@@ -1,31 +1,52 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import fruitImg from "../img/fruits.jpg";
-import { Box } from "@mui/system";
-import {Typography, Button, TextField, Link} from '@mui/material';
-import Header from '../structure/Header';
-import Footer from '../structure/Footer';
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { Box } from "@mui/system"
+import {Typography, Button, TextField, Link} from '@mui/material'
+import Header from '../structure/Header'
+import Footer from '../structure/Footer'
 
 function Login(props) {
 
-  let navigate = useNavigate();
-  const baseURL = props.baseURL;
+  let navigate = useNavigate()
+  const baseURL = props.baseURL
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const emailOnChange = (event) => {
-    setEmail(event.target.value);
+    setEmail(event.target.value)
   };
   const passwordOnChange = (event) => {
-    setPassword(event.target.value);
+    setPassword(event.target.value)
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const loginHandler = () => {
+    const enteredMail = email;
+    const enteredPassword = password;
+    const payload = {
+      email: enteredMail,
+      password: enteredPassword,
+    }
+    const requestOptions = {
+      method: "POST",
+      mode: "cors",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }
+    fetch(`${baseURL}/login`, requestOptions)
+    .then((response) => response.json())
+      .then((res) => {
+        if (res.status === "200") {
+          props.setIsLoggedIn(true);
+          navigate('/');
+          return true;
+        } else {
+          props.setIsLoggedIn(false);
+          return false;
+        }
+      })
   }
-
-  // login functionality to be implemented once real backend is there - post request with checkLogin-Logic
 
   return (
     <div>
@@ -34,14 +55,13 @@ function Login(props) {
         <Typography variant="h5" mb={3} fontWeight="bold">
           Sign in to Fruitilicious!
         </Typography>
-        <Box onSubmit={handleSubmit} noValidate>
+        <Box noValidate>
              <TextField
               margin="normal"
               required
               id="email"
-              label="Email"
+              label="E-Mail"
               name="email"
-              autoComplete="email"
               autoFocus
               color="success"
             /><br/>
@@ -52,7 +72,6 @@ function Login(props) {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
               color="success"
             /><br/>
             <Button
@@ -60,6 +79,7 @@ function Login(props) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               color="success"
+              onClick={loginHandler}
             >
               Sign In
             </Button>
@@ -74,4 +94,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default Login

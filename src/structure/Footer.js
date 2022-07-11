@@ -8,8 +8,7 @@ const Footer = () => {
           height: 50,  
           textAlign: 'center', 
           backgroundColor:'secondary.footer'}} >
-            <Typography
-              variant="h7">
+            <Typography mt={1}>
               &copy; 2022 - KBE Project by Maxim, Ricardo and Robert
             </Typography>
       </Container>
