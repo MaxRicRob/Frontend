@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginPage from '../pages/LoginPage'
-import ProductsPage from '../pages/ProductsPage'
+import AllProductsPage from '../pages/AllProductsPage'
 import ProductDetailPage from '../pages/ProductDetailPage'
-import ComponentsPage from '../pages/ComponentsPage'
+import AllComponentsPage from '../pages/AllComponentsPage'
 import ComponentDetailPage from '../pages/ComponentDetailPage'
-import UserProductsPage from '../pages/UserProductsPage'
+import AllUserProductsPage from '../pages/AllUserProductsPage'
 import UserProductDetailPage from '../pages/UserProductDetailPage'
 
 function Router(props, {setIsLoggedIn}) {
@@ -18,7 +18,7 @@ function Router(props, {setIsLoggedIn}) {
         <Route
           exact
           path="/"
-          element={<ProductsPage
+          element={<AllProductsPage
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
@@ -42,7 +42,7 @@ function Router(props, {setIsLoggedIn}) {
         <Route
           exact
           path="/components"
-          element={<ComponentsPage
+          element={<AllComponentsPage
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
@@ -58,7 +58,7 @@ function Router(props, {setIsLoggedIn}) {
         <Route
           exact
           path="/userproducts/:id"
-          element={<UserProductsPage
+          element={<AllUserProductsPage
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}

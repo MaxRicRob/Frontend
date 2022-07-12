@@ -2,7 +2,7 @@ import Header from "../structure/Header"
 import Footer from "../structure/Footer"
 import AllComponents from "../components/AllComponents"
 
-const ComponentsPage = (props) => {
+const AllComponentsPage = (props) => {
     const baseURL = props.baseURL
     return ( 
         <div>
@@ -13,4 +13,4 @@ const ComponentsPage = (props) => {
      );
 }
  
-export default ComponentsPage;
+export default AllComponentsPage;

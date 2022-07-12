@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import _ from "lodash"
 import { useParams } from "react-router"
 import mockUserProducts from "../mock_api/mock_userproducts.json"
+import AddUserProduct from "./AddUserProduct"
 
 const AllUserProducts = (props) => {
     const baseURL = props.baseURL
@@ -34,7 +35,12 @@ const AllUserProducts = (props) => {
                <UserProduct product={product}/>
             </Box>
           </Grid>
-        ))} 
+        ))}
+        <Grid item xs={12} sm={6} md={4} lg={4}>
+          <Box mt={12} ml={5} mr={5}>
+            <AddUserProduct/>
+          </Box>
+        </Grid> 
       </Grid>
      )
     // }

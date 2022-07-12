@@ -2,7 +2,7 @@ import Header from "../structure/Header";
 import Footer from "../structure/Footer";
 import AllProducts from "../components/AllProducts";
 
-const ProductsPage = (props) => {
+const AllProductsPage = (props) => {
     return(
         <div>
            <Header isLoggedIn={props.isLoggedIn}/>
@@ -12,4 +12,4 @@ const ProductsPage = (props) => {
     )
 }
 
-export default ProductsPage;
+export default AllProductsPage;

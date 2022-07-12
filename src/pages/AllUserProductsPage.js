@@ -2,7 +2,7 @@ import Header from "../structure/Header"
 import Footer from "../structure/Footer"
 import AllUserProducts from "../components/AllUserProducts"
 
-const UserProductsPage = (props) => {
+const AllUserProductsPage = (props) => {
 
     return(
         <div>
@@ -13,4 +13,4 @@ const UserProductsPage = (props) => {
     )    
 }
 
-export default UserProductsPage
+export default AllUserProductsPage
