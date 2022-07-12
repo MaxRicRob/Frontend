@@ -1,15 +1,16 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
-import ProductsPage from '../pages/ProductsPage';
-import ProductDetailPage from '../pages/ProductDetailPage';
-import ComponentsPage from '../pages/ComponentsPage';
-import ComponentDetailPage from '../pages/ComponentDetailPage';
-import UserProductsPage from '../pages/UserProductsPage';
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import LoginPage from '../pages/LoginPage'
+import ProductsPage from '../pages/ProductsPage'
+import ProductDetailPage from '../pages/ProductDetailPage'
+import ComponentsPage from '../pages/ComponentsPage'
+import ComponentDetailPage from '../pages/ComponentDetailPage'
+import UserProductsPage from '../pages/UserProductsPage'
+import UserProductDetailPage from '../pages/UserProductDetailPage'
 
 function Router(props, {setIsLoggedIn}) {
 
-  const baseURL = "http://localhost:3002";
+  const baseURL = "http://localhost:3002"
 
   return (
     <BrowserRouter>
@@ -62,10 +63,18 @@ function Router(props, {setIsLoggedIn}) {
             baseURL={baseURL} 
             />}
         />
+        <Route
+          exact
+          path="/userproduct/:id"
+          element={<UserProductDetailPage
+            isLoggedIn={props.isLoggedIn}
+            baseURL={baseURL} 
+            />}
+        />
       </Routes>
     </BrowserRouter>
   )
 
 }
 
-export default Router;
+export default Router

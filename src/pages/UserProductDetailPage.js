@@ -4,7 +4,7 @@ import { Box, Card, CardContent, CircularProgress, Typography} from "@mui/materi
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router"
 
-const ProductDetailPage = (props) => {
+const UserProductDetailPage = (props) => {
     const baseURL = props.baseURL
 
     const [product, setProduct] = useState([])
@@ -13,49 +13,20 @@ const ProductDetailPage = (props) => {
 
     const { id } = useParams() //gets productID from current route
 
-    useEffect(() => {
-        let mounted = true
-        setTimeout(() => {
-          async function getProduct() {
-            fetch(`${baseURL}/products/${id}`, {
-              method: "GET",
-              credentials: "include",
-            })
-              .then((res) => res.json())
-              .then(
-                (result) => {
-                  if (mounted) {
-                    setIsLoaded(true)
-                    setProduct(result)
-                  }
-                },
-                (error) => {
-                  if (mounted) {
-                    setIsLoaded(true)
-                    setError(error)
-                  }
-                }
-              )
-          } 
-        getProduct()},2000)
-        return () => (mounted = false) //cleanup function
-    },[product, baseURL, id])
-        
-
-    if (error) {
-        return <div>Error: {error.message}</div>
-    } else if (!isLoaded) {
-      return(
-        <div>
-        <Header/>
-          <Box textAlign="center" mt={15}>
-            <CircularProgress 
-            centered
-            sx={{ color: 'secondary.loading' }}/>
-          </Box>
-        <Footer/>
-      </div>)
-    } else {
+    // if (error) {
+    //     return <div>Error: {error.message}</div>
+    // } else if (!isLoaded) {
+    //   return(
+    //     <div>
+    //     <Header/>
+    //       <Box textAlign="center" mt={15}>
+    //         <CircularProgress 
+    //         centered
+    //         sx={{ color: 'secondary.loading' }}/>
+    //       </Box>
+    //     <Footer/>
+    //   </div>)
+    // } else {
     return ( 
         <div>
             <Header isLoggedIn={props.isLoggedIn}/>
@@ -86,7 +57,8 @@ const ProductDetailPage = (props) => {
             </Box>
             <Footer/>
         </div>
-     )}
+     )
+    // }
 }
  
-export default ProductDetailPage
+export default UserProductDetailPage

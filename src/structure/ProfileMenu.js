@@ -21,7 +21,7 @@ const ProfileMenu = () => {
     }
     const toUserProductsHandler = () => {
         setAnchorEl(null)
-        navigate('/userproducts')
+        navigate('/userproducts/ba8fb812-b71f-4395-ba1e-07946e652dee') // id hard-coded for testing purpose -> change later
     }
 
     return(
