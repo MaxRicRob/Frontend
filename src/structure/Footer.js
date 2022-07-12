@@ -2,10 +2,12 @@ import { Container, Typography } from "@mui/material"
 
 const Footer = () => {
     return(
-        <Container sx={{
+        <Container 
+        maxWidth={false}
+        sx={{
           position: 'fixed', 
-          bottom:7,
-          height: 50,  
+          bottom:1,
+          height: 50,
           textAlign: 'center', 
           backgroundColor:'secondary.footer'}} >
             <Typography mt={1}>
