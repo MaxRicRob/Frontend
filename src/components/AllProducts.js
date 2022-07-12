@@ -9,6 +9,7 @@ const AllProducts = (props) => {
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
 
+    // try useAxios hook to DRY 
     useEffect(() => {
         let mounted = true
         setTimeout(() => {
@@ -16,6 +17,9 @@ const AllProducts = (props) => {
                 fetch(`${props.baseURL}/products`,{
                     method: "GET",
                     credentials: "include",
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Allow-Origin': '*'}
                 }).then((res) => res.json())
                 .then(
                     (result) =>{
