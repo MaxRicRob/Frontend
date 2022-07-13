@@ -2,42 +2,24 @@ import { Grid, Box, CircularProgress } from "@mui/material"
 import Component from "./Component"
 import { useState, useEffect } from 'react'
 import _ from "lodash"
+import useAxios from "../hooks/useAxios"
 
 const AllComponents = (props) => {
 
     const [components, setComponents] = useState([])
-    const [error, setError] = useState(null)
-    const [isLoaded, setIsLoaded] = useState(false)
+    const { response, loading, error } = useAxios({
+      method: 'get',
+      url: `${props.baseURL}/components`
+    })
 
     useEffect(() => {
-        let mounted = true
-        setTimeout(() => {
-            async function getComponents() {
-                fetch(`${props.baseURL}/components`,{
-                    method: "GET",
-                    credentials: "include",
-                }).then((res) => res.json())
-                .then(
-                    (result) =>{
-                        if(mounted){
-                            setIsLoaded(true)
-                            setComponents(result)
-                        }
-                    },
-                    (error) =>{
-                        if(mounted){
-                            setIsLoaded(true)
-                            setError(error)
-                        }
-                    }
-                )}
-                getComponents()}, 2000)
-        return () => (mounted = false) //cleanup function
-    }, [components, props.baseURL])
+      if(response!==null)
+      setComponents(response)
+    },[response])
 
     if (error) {
         return <div>Error: {error.message}</div>
-      } else if (!isLoaded) {
+      } else if (loading) {
         return(
         <Box textAlign="center" mt={15}>
           <CircularProgress 

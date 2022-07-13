@@ -2,46 +2,24 @@ import { Grid, Box, CircularProgress } from "@mui/material"
 import Product from "./Product"
 import { useState, useEffect } from 'react'
 import _ from "lodash"
+import useAxios from "../hooks/useAxios"
 
 const AllProducts = (props) => {
 
     const [products, setProducts] = useState([])
-    const [error, setError] = useState(null)
-    const [isLoaded, setIsLoaded] = useState(false)
+    const { response, loading, error } = useAxios({
+      method: 'get',
+      url: `${props.baseURL}/products`
+    })
 
-    // try useAxios hook to DRY 
     useEffect(() => {
-        let mounted = true
-        setTimeout(() => {
-            async function getProducts() {
-                fetch(`${props.baseURL}/products`,{
-                    method: "GET",
-                    credentials: "include",
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Access-Control-Allow-Origin': '*'}
-                }).then((res) => res.json())
-                .then(
-                    (result) =>{
-                        if(mounted){
-                            setIsLoaded(true)
-                            setProducts(result)
-                        }
-                    },
-                    (error) =>{
-                        if(mounted){
-                            setIsLoaded(true)
-                            setError(error)
-                        }
-                    }
-                )}
-                getProducts()}, 2000)
-        return () => (mounted = false) //cleanup function
-    }, [products, props.baseURL])
+      if(response !== null)
+        setProducts(response)
+    },[response])
 
     if (error) {
       return <div>Error: {error.message}</div>
-    } else if (!isLoaded) {
+    } else if (loading) {
       return(
       <Box textAlign="center" mt={15}>
         <CircularProgress 

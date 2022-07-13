@@ -3,48 +3,24 @@ import Footer from "../structure/Footer"
 import { Box, Card, CardContent, CircularProgress, Typography} from "@mui/material"
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router"
+import useAxios from "../hooks/useAxios"
 
 const ProductDetailPage = (props) => {
-    const baseURL = props.baseURL
-
     const [product, setProduct] = useState([])
-    const [isLoaded, setIsLoaded] = useState(false)    
-    const [error, setError] = useState(null)
-
     const { id } = useParams() //gets productID from current route
+    const { response, loading, error } = useAxios({
+      method: 'get',
+      url: `${props.baseURL}/products/${id}`
+    })
 
     useEffect(() => {
-        let mounted = true
-        setTimeout(() => {
-          async function getProduct() {
-            fetch(`${baseURL}/products/${id}`, {
-              method: "GET",
-              credentials: "include",
-            })
-              .then((res) => res.json())
-              .then(
-                (result) => {
-                  if (mounted) {
-                    setIsLoaded(true)
-                    setProduct(result)
-                  }
-                },
-                (error) => {
-                  if (mounted) {
-                    setIsLoaded(true)
-                    setError(error)
-                  }
-                }
-              )
-          } 
-        getProduct()},2000)
-        return () => (mounted = false) //cleanup function
-    },[product, baseURL, id])
-        
+      if(response !== null)
+        setProduct(response)
+    },[response])
 
     if (error) {
         return <div>Error: {error.message}</div>
-    } else if (!isLoaded) {
+    } else if (loading) {
       return(
         <div>
         <Header/>
