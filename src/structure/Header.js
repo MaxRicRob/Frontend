@@ -5,38 +5,37 @@ import ProfileMenu from "./ProfileMenu"
 
 const Header = (props) => {
 
-    const currencies = [
-        {
-          value: 'USD',
-          label: '$',
-        },
-        {
-          value: 'EUR',
-          label: '€',
-        },
-        {
-          value: 'MXN',
-          label: 'MX$',
-        },
-        {
-          value: 'CAD',
-          label: 'CA$',
-        },
-        {
-          value: 'YEN',
-          label: '¥',
-        },
-        {
-          value: 'POUND',
-          label: '£',
-        }
-      ]
+  const currencies = [
+    {
+      value: 'USD',
+      label: '$',
+    },
+    {
+      value: 'EUR',
+      label: '€',
+    },
+    {
+      value: 'MXN',
+      label: 'MX$',
+    },
+    {
+      value: 'CAD',
+      label: 'CA$',
+    },
+    {
+      value: 'YEN',
+      label: '¥',
+    },
+    {
+      value: 'POUND',
+      label: '£',
+    }
+  ]
 
     const [currency, setCurrency] = useState('EUR')
 
     const currencyChangeHandler = (e) => {
-        const enteredCurrency = e.target.value
-        setCurrency(enteredCurrency)
+        setCurrency(e.target.value)
     }
 
     return(
