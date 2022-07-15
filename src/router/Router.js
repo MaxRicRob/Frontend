@@ -10,7 +10,7 @@ import UserProductDetailPage from '../pages/UserProductDetailPage'
 
 function Router(props, {setIsLoggedIn}) {
 
-  const baseURL = "http://localhost:3002"
+  const baseURL = "http://localhost:8085"
 
   return (
     <BrowserRouter>

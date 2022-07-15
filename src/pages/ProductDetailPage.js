@@ -8,8 +8,10 @@ import useAxios from "../hooks/useAxios"
 const ProductDetailPage = (props) => {
     const [product, setProduct] = useState([])
     const { id } = useParams() //gets productID from current route
+
     const { response, loading, error } = useAxios({
       method: 'get',
+      mode: 'cors',
       url: `${props.baseURL}/products/${id}`
     })
 
@@ -46,7 +48,7 @@ const ProductDetailPage = (props) => {
                         </div>
                         <div style={{textAlign: 'right'}}>
                         <Typography variant="body1" gutterBottom>
-                            {product.description}
+                            Description
                         </Typography>
                         </div>
                         <div style={{textAlign: 'left'}}>
@@ -62,7 +64,8 @@ const ProductDetailPage = (props) => {
             </Box>
             <Footer/>
         </div>
-     )}
+     )
+    }
 }
  
 export default ProductDetailPage

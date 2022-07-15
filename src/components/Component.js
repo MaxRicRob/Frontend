@@ -1,21 +1,33 @@
 import { Card, CardContent, CardActions, CardActionArea, Typography, Button } from "@mui/material"
 import { useNavigate } from 'react-router'
+import useAxios from "../hooks/useAxios"
 
-const Component = ({component}) => {
+const Component = (props) => {
     
     let navigate = useNavigate()
+
+    const { response, loading, error } = useAxios({
+        method: 'get',
+        mode: 'cors',
+        url: `${props.baseURL}/currencyRequest`,
+        body: JSON.stringify({
+            //add price object -> currency ctx needed
+        })
+    })
+
+
     
     return ( 
         <Card>
-        <CardActionArea onClick={() => {navigate(`/component/${component.id}`)}}>
+        <CardActionArea onClick={() => {navigate(`/component/${props.component.id}`)}}>
                 <CardContent>
                     <div>
                     <Typography variant="h6" gutterBottom>
-                        {component.name}
+                        {props.component.name}
                     </Typography>
                         <div style={{textAlign: 'right'}}>
                     <Typography variant="h6">
-                      Price
+                        {props.component.price}
                     </Typography>
                         </div>
                     </div>

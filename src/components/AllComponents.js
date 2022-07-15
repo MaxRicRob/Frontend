@@ -9,7 +9,8 @@ const AllComponents = (props) => {
     const [components, setComponents] = useState([])
     const { response, loading, error } = useAxios({
       method: 'get',
-      url: `${props.baseURL}/components`
+      mode: 'cors',
+      url: `${props.baseURL}/productComponents`
     })
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const AllComponents = (props) => {
         {components.map((component) => (
           <Grid item key={component.id} xs={12} sm={6} md={4} lg={4}>
             <Box mt={12} ml={5} mr={5}>
-              <Component component={component}/>
+              <Component baseURL={props.baseURL} component={component}/>
             </Box>
           </Grid>
         ))} 

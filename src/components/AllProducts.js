@@ -9,7 +9,8 @@ const AllProducts = (props) => {
     const [products, setProducts] = useState([])
     const { response, loading, error } = useAxios({
       method: 'get',
-      url: `${props.baseURL}/products`
+      mode: 'cors',
+      url: `${props.baseURL}/defaultProducts`
     })
 
     useEffect(() => {
