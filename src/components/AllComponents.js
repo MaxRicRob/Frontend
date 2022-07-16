@@ -10,7 +10,7 @@ const AllComponents = (props) => {
     const { response, loading, error } = useAxios({
       method: 'get',
       mode: 'cors',
-      url: `${props.baseURL}/productComponents`
+      url: '/productComponents'
     })
 
     useEffect(() => {

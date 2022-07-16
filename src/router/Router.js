@@ -11,23 +11,23 @@ import UserProductDetailPage from '../pages/UserProductDetailPage'
 function Router(props, {setIsLoggedIn}) {
 
   const baseURL = "http://localhost:8085"
-
+  
   return (
     <BrowserRouter>
       <Routes>
         <Route
           exact
-          path="/"
-          element={<AllProductsPage
-            isLoggedIn={props.isLoggedIn}
+          path="/login"
+          element={<LoginPage
+            setIsLoggedIn={setIsLoggedIn}
             baseURL={baseURL} 
             />}
         />
         <Route
           exact
-          path="/login"
-          element={<LoginPage
-            setIsLoggedIn={setIsLoggedIn}
+          path="/"
+          element={<AllProductsPage
+            isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
         />

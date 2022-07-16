@@ -9,7 +9,7 @@ const Component = (props) => {
     const { response, loading, error } = useAxios({
         method: 'get',
         mode: 'cors',
-        url: `${props.baseURL}/currencyRequest`,
+        url: '/currencyRequest',
         body: JSON.stringify({
             //add price object -> currency ctx needed
         })

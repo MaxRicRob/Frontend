@@ -10,7 +10,7 @@ const AllProducts = (props) => {
     const { response, loading, error } = useAxios({
       method: 'get',
       mode: 'cors',
-      url: `${props.baseURL}/defaultProducts`
+      url: '/defaultProducts'
     })
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const AllProducts = (props) => {
         {products.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
             <Box mt={12} ml={5} mr={5}>
-              <Product product={product}/>
+              <Product baseURL={props.baseURL} product={product}/>
             </Box>
           </Grid>
         ))} 

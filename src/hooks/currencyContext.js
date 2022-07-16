@@ -1,7 +1,7 @@
 import React, { useReducer, createContext } from 'react'
 import useAxios from './useAxios'
 
-export const Currencies = [
+export const currencies = [
     {
       value: 'USD',
       label: '$',
@@ -28,7 +28,7 @@ export const Currencies = [
     }
   ]
 
-const Context = createContext({
+export const CurrencyContext = createContext({
     currency: {},
     changeCurrency: () => {}
 })
@@ -41,4 +41,18 @@ const appReducer = (state, action) => {
             }
         default: return
     }
+}
+
+export const CurrencyCtxProvider = ({children}) => {
+  const [currency, dispatch] = useReducer(appReducer, {...currencies[1]})
+
+  const changeCurrency = () =>{
+
+  }
+
+  return(
+    <CurrencyContext.Provider value={{currency, changeCurrency}}>
+      {children}
+    </CurrencyContext.Provider>
+  )
 }
