@@ -1,12 +1,15 @@
 import Router from "./router/Router";
 import { useState } from "react";
+import { CurrencyCtxProvider } from './hooks/currencyContext'
 
 const App = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return(
-        <Router isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <CurrencyCtxProvider>
+            <Router isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        </CurrencyCtxProvider>
     )
 }
 

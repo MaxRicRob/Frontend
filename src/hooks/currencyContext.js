@@ -1,5 +1,4 @@
-import React, { useReducer, createContext } from 'react'
-import useAxios from './useAxios'
+import React, { createContext, useState } from 'react'
 
 export const currencies = [
     {
@@ -33,21 +32,12 @@ export const CurrencyContext = createContext({
     changeCurrency: () => {}
 })
 
-const appReducer = (state, action) => {
-    switch(action.type){
-        case 'USD':
-            return{
-
-            }
-        default: return
-    }
-}
-
 export const CurrencyCtxProvider = ({children}) => {
-  const [currency, dispatch] = useReducer(appReducer, {...currencies[1]})
 
-  const changeCurrency = () =>{
+  const [currency, setCurrency] = useState("EUR")
 
+  const changeCurrency = (currencyToChangeTo) =>{
+    setCurrency(currencyToChangeTo)
   }
 
   return(

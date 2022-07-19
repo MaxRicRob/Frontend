@@ -1,41 +1,15 @@
 import { AppBar, Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import ProfileMenu from "./ProfileMenu"
+import { currencies, CurrencyContext } from '../hooks/currencyContext'
 
 const Header = (props) => {
 
-  const currencies = [
-    {
-      value: 'USD',
-      label: '$',
-    },
-    {
-      value: 'EUR',
-      label: '€',
-    },
-    {
-      value: 'MXN',
-      label: 'MX$',
-    },
-    {
-      value: 'CAD',
-      label: 'CA$',
-    },
-    {
-      value: 'YEN',
-      label: '¥',
-    },
-    {
-      value: 'POUND',
-      label: '£',
-    }
-  ]
-
-    const [currency, setCurrency] = useState('EUR')
+    const { currency, changeCurrency } = useContext(CurrencyContext)
 
     const currencyChangeHandler = (e) => {
-        setCurrency(e.target.value)
+        changeCurrency(e.target.value)
     }
 
     return(
