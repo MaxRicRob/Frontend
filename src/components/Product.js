@@ -6,24 +6,26 @@ import { useState, useEffect } from "react"
 const Product = (props) => {
     
     let navigate = useNavigate()
-
     let componentPrices = props.product.components.map((id) => id.price)
-    // console.log(componentPrices)
 
     const [price, setPrice] = useState([])
     const { response, loading, error } = useAxios({
-      method: 'get',
+      method: 'POST',
       mode: 'cors',
       url: '/priceRequest',
-      headers: JSON.stringify({
-        "Access-Control-Allow-Origin": "*"
-      }),
-      body: JSON.stringify({prices : [{componentPrices}]})
-    })
+      data: {
+        "prices": componentPrices
+      }})
 
     useEffect(() => {
       if(response !== null)
-      setPrice(response)
+      {
+        var jsonStr = JSON.stringify(response)
+        var value = ""
+        for(var i = 14; i<jsonStr.length-1; i++){
+          value += jsonStr[i]
+        }
+        setPrice(value)}
     },[response])
 
     return(
@@ -36,7 +38,7 @@ const Product = (props) => {
                         </Typography>
                             <div style={{textAlign: 'right'}}>
                         <Typography variant="h6">
-                          Price
+                          {price}
                         </Typography>
                             </div>
                         </div>
