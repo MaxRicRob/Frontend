@@ -9,6 +9,7 @@ const ComponentDetailPage = (props) => {
     const baseURL = props.baseURL
     const [component, setComponent] = useState([])
     const { id } = useParams() //gets id from current route
+    
     const { response, loading, error } = useAxios({
       method: 'get',
       url: `${baseURL}/components/${id}`

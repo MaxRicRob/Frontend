@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginPage from '../pages/LoginPage'
 import AllProductsPage from '../pages/AllProductsPage'
@@ -7,10 +7,23 @@ import AllComponentsPage from '../pages/AllComponentsPage'
 import ComponentDetailPage from '../pages/ComponentDetailPage'
 import AllUserProductsPage from '../pages/AllUserProductsPage'
 import UserProductDetailPage from '../pages/UserProductDetailPage'
+import useAxios from "../hooks/useAxios"
 
 function Router(props, {setIsLoggedIn}) {
 
   const baseURL = "http://localhost:8085"
+
+  const [defaultProducts, setDefaultProducts] = useState([])
+  const { response, loading, error } = useAxios({
+    method: 'GET',
+    mode: 'cors',
+    url: '/defaultProducts'
+  })
+
+  useEffect(() => {
+    if(!loading){
+    setDefaultProducts(response)}
+  },[])
   
   return (
     <BrowserRouter>
@@ -35,6 +48,7 @@ function Router(props, {setIsLoggedIn}) {
           exact
           path="/product/:id"
           element={<ProductDetailPage
+            defaultProducts={defaultProducts}
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}

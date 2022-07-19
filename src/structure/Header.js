@@ -1,10 +1,10 @@
 import { AppBar, Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material"
 import { Link } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import ProfileMenu from "./ProfileMenu"
-import { currencies, CurrencyContext } from '../hooks/currencyContext'
+import { currencies, CurrencyContext } from '../hooks/useCurrencyContext'
 
-const Header = (props) => {
+const Header = () => {
 
     const { currency, changeCurrency } = useContext(CurrencyContext)
 
