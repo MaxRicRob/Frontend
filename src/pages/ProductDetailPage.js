@@ -1,39 +1,17 @@
 import Header from "../structure/Header"
 import Footer from "../structure/Footer"
-import { Box, Card, CardContent, CircularProgress, Typography} from "@mui/material"
+import { Box, Card, CardContent, CircularProgress, List, ListItem, ListItemText, Typography} from "@mui/material"
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router"
 import useAxios from "../hooks/useAxios"
 
 const ProductDetailPage = (props) => {
-    const [product, setProduct] = useState([])
-    const { id } = useParams() //gets productID from current route
+    const { id } = useParams() //gets productID from current url-parameter
 
-    const { response, loading, error } = useAxios({
-      method: 'get',
-      mode: 'cors',
-      url: `${props.baseURL}/products/${id}`
-    })
+    const product = props.defaultProducts[id]
 
-    useEffect(() => {
-      if(response !== null)
-        setProduct(response)
-    },[response])
+    console.log(props.defaultProducts)
 
-    if (error) {
-        return <div>Error: {error.message}</div>
-    } else if (loading) {
-      return(
-        <div>
-        <Header/>
-          <Box textAlign="center" mt={15}>
-            <CircularProgress 
-            centered
-            sx={{ color: 'secondary.loading' }}/>
-          </Box>
-        <Footer/>
-      </div>)
-    } else {
     return ( 
         <div>
             <Header isLoggedIn={props.isLoggedIn}/>
@@ -41,23 +19,39 @@ const ProductDetailPage = (props) => {
                 <Card>
                     <CardContent>
                         <div style={{display: "flex", justifyContent: "space-between"}}>
-                            Picture
                         <Typography variant="h5" gutterBottom>
-                            {product.name}
-                        </Typography>
-                        </div>
-                        <div style={{textAlign: 'right'}}>
-                        <Typography variant="body1" gutterBottom>
-                            Description
+                          {/* {product.name} */}
                         </Typography>
                         </div>
                         <div style={{textAlign: 'left'}}>
                         <Typography variant="body1" gutterBottom>
-                            Product Components: x, y, z
+                            Product Components: 
+                           {/* <List>
+                           {product.components.map((component) => (
+                            <ListItem alignItems="flex-start">
+                              <ListItemText
+                              primary={component.name}
+                              secondary={
+                                "ID: "+component.id+", "+
+                                "Color: "+component.color+", "+ 
+                                "Farmer: "+component.farmer+", "+
+                                "Organic: "+component.organic+", "+
+                                "Awesomeness: "+component.awesomeness+", "+
+                                "Origin: "+component.origin+", "+
+                                "Calories: "+component.calories+", "+
+                                "Weight: "+component.weight+", "+
+                                "Price: "+component.price
+                              }
+                              />
+                            </ListItem>
+                          ))}  
+                            </List> */}
                         </Typography>
+                        <div style={{textAlign: 'right'}}>
                         <Typography variant="h6">
-                            Price
+                            Total Price of Product: 
                         </Typography>
+                        </div>
                         </div>
                     </CardContent>
                 </Card>
@@ -66,6 +60,6 @@ const ProductDetailPage = (props) => {
         </div>
      )
     }
-}
+// }
  
 export default ProductDetailPage
