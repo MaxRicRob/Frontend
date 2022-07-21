@@ -35,7 +35,11 @@ const AllProducts = (props) => {
         {products.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
             <Box mt={12} ml={5} mr={5}>
-              <Product baseURL={props.baseURL} product={product} componentName={componentName}/>
+              <Product 
+              key={product.id} 
+              baseURL={props.baseURL}
+              product={product} 
+              componentName={componentName}/>
             </Box>
           </Grid>
         ))} 

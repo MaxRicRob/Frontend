@@ -17,6 +17,7 @@ const ProductDetailPage = (props) => {
             <Header isLoggedIn={props.isLoggedIn}/>
             <Box mt={12} ml={10} mr={10}>
               <Product 
+              key={product.id}
               baseURL={props.baseURL} 
               componentName={componentName}
               product={product}/>

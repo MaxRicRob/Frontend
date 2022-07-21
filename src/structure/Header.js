@@ -14,6 +14,11 @@ const Header = () => {
         changeCurrency(e.target.value)
     }
 
+    const fruitiliciousClickHandler = () => {
+        navigate('/')
+        window.location.reload()
+    }
+
     const productsClickHandler = () => {
         navigate('/')
         window.location.reload()
@@ -29,13 +34,11 @@ const Header = () => {
         position="fixed" 
         sx={{bgcolor: 'secondary.main'}}>
             <Toolbar >
-                <Typography component={Link}
-                    to="/"
-                    variant="h5"
-                    ml={5}
-                    fontWeight="bold">
+                <Button
+                onClick={fruitiliciousClickHandler}
+                sx={{color: '#fff', fontWeight: '700', fontSize: '22px', marginLeft: '20px'}}>
                     Fruitilicious
-                </Typography>
+                </Button>
                 <Grid
               container
               spacing={6}
