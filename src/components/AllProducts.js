@@ -6,6 +6,8 @@ import useAxios from "../hooks/useAxios"
 
 const AllProducts = (props) => {
 
+    const componentName = 'allProducts'
+    console.log(componentName)
     const [products, setProducts] = useState([])
     const { response, loading, error } = useAxios({
       method: 'GET',
@@ -34,7 +36,7 @@ const AllProducts = (props) => {
         {products.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
             <Box mt={12} ml={5} mr={5}>
-              <Product baseURL={props.baseURL} product={product}/>
+              <Product baseURL={props.baseURL} product={product} componentName={componentName}/>
             </Box>
           </Grid>
         ))} 

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardActions, CardActionArea, Typography, Button } from "@mui/material"
+import { Card, CardContent, CardActions, CardActionArea, List, ListItem, ListItemText, Typography, Button } from "@mui/material"
 import { useNavigate } from 'react-router'
 import useAxios from "../hooks/useAxios"
 import { useContext, useState, useEffect } from "react"
@@ -63,22 +63,67 @@ const Product = (props) => {
     // }, [currency])
 
     return(
-        <Card>
-            <CardActionArea onClick={() => {navigate(`/product/${props.product.id}`)}}>
+      <div>
+      { (props.componentName === 'productDetail') ? 
+        (<Card>
                     <CardContent>
-                        <div>
-                        <Typography variant="h6" gutterBottom>
-                            {props.product.name}
+                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <Typography variant="h5" gutterBottom>
+                          {props.product.name}
                         </Typography>
-                            <div style={{textAlign: 'right'}}>
+                        </div>
+                        <div style={{textAlign: 'left'}}>
+                        <Typography variant="body1" gutterBottom>
+                            Product Components: 
+                           <List>
+                           {props.product.components.map((component) => (
+                            <ListItem alignItems="flex-start">
+                              <ListItemText
+                              primary={component.name}
+                              secondary={
+                                "ID: "+component.id+", "+
+                                "Color: "+component.color+", "+ 
+                                "Farmer: "+component.farmer+", "+
+                                "Organic: "+component.organic+", "+
+                                "Awesomeness: "+component.awesomeness+", "+
+                                "Origin: "+component.origin+", "+
+                                "Calories: "+component.calories+", "+
+                                "Weight: "+component.weight+", "+
+                                "Price: "+component.price
+                              }
+                              />
+                            </ListItem>
+                          ))}  
+                            </List>
+                        </Typography>
+                        <div style={{textAlign: 'right'}}>
                         <Typography variant="h6">
-                            {price} {currency}
+                            Total Price of Product: {price}
                         </Typography>
-                            </div>
+                        </div>
                         </div>
                     </CardContent>
-            </CardActionArea>
-        </Card>
+                </Card>)
+            : (props.componentName === 'allProducts') ?
+            (<Card>
+                <CardActionArea onClick={() => {navigate(`/product/${props.product.id}`)}}>
+                        <CardContent>
+                            <div>
+                            <Typography variant="h6" gutterBottom>
+                                {props.product.name}
+                            </Typography>
+                                <div style={{textAlign: 'right'}}>
+                            <Typography variant="h6">
+                                {price} {currency}
+                            </Typography>
+                                </div>
+                            </div>
+                        </CardContent>
+                </CardActionArea>
+            </Card>)
+            : <></>
+      }
+      </div>
     )
 }
 
