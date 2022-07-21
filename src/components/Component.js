@@ -1,9 +1,55 @@
 import { Card, CardContent, CardActionArea, Grid, ListItem, ListItemText, Typography } from "@mui/material"
 import { useNavigate } from 'react-router'
+import { CurrencyContext } from "../hooks/useCurrencyContext"
+import {useContext, useState, useEffect} from 'react'
 
 const Component = (props) => {
     
     let navigate = useNavigate()
+    const { currency, currencySwitched } = useContext(CurrencyContext)
+    const [price, setPrice] = useState("")
+    const [initPrice, setInitPrice] = useState()
+    
+    useEffect(() => {
+        if(props.component.price !== ''){
+            setInitPrice(props.component.price)
+            setPrice(props.component.price)}
+    },[])
+
+    useEffect(() => {
+        let mounted = true
+        async function getNewPrice(){
+          const data = {
+            totalPrice: price,
+            wantedCurrency: currency
+          }
+          const requestOptions = {
+            method: 'POST',
+            mode: 'cors',
+            headers: { "Content-Type": "application/json; charset=UTF-8" },
+            body: JSON.stringify(data)
+          }
+          fetch(`${props.baseURL}/currencyRequest`,requestOptions)
+          .then((res) => res.json())
+          .then((result) => {
+            if(mounted){
+              if(currency === 'EUR' && currencySwitched){
+                setPrice(initPrice)
+              }else 
+              if (currency !== 'EUR' && currencySwitched){
+                var jsonStr = JSON.stringify(result)
+                var value = ""
+                for(var i = 14; i<jsonStr.length-24; i++){
+                  value += jsonStr[i]
+                }
+                setPrice(value)
+              }
+            }
+          })
+        }
+        getNewPrice()
+        return () => (mounted = false)
+      },[currency])
 
     return (
         <div>
@@ -17,7 +63,7 @@ const Component = (props) => {
                              </Typography>
                                  <div style={{textAlign: 'right'}}>
                              <Typography variant="h6">
-                                 {props.component.price}
+                                 {price} {currency}
                              </Typography>
                                  </div>
                              </div>
@@ -62,7 +108,7 @@ const Component = (props) => {
                         </div>
                         <div style={{textAlign: 'center', marginTop: 10}}>
                         <Typography variant="h6">
-                            Price: {props.component.price}
+                            Price: {price} {currency}
                         </Typography>
                         </div>
                     </CardContent>

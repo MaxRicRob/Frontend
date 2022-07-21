@@ -1,15 +1,25 @@
-import { AppBar, Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material"
+import { AppBar, Button,Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material"
 import { Link } from "react-router-dom"
 import { useContext } from "react"
 import ProfileMenu from "./ProfileMenu"
 import { currencies, CurrencyContext } from '../hooks/useCurrencyContext'
+import { useNavigate } from 'react-router'
 
 const Header = () => {
 
+    let navigate = useNavigate()
     const { currency, changeCurrency } = useContext(CurrencyContext)
 
     const currencyChangeHandler = (e) => {
         changeCurrency(e.target.value)
+    }
+
+    const productsClickHandler = () => {
+        navigate('/')
+    }
+
+    const componentsClickHandler = () => {
+        navigate('/components')
     }
 
     return(
@@ -47,18 +57,18 @@ const Header = () => {
                     </TextField>
                 </Grid>
                 <Grid item>
-                <Typography component={Link}
-                    to="/"
-                    variant="h6">
+                    <Button 
+                    onClick={productsClickHandler}
+                    sx={{color: '#fff', fontWeight: '600', fontSize: '15px'}}>
                     Products
-                </Typography>
+                    </Button>
                 </Grid>
                 <Grid item>
-                <Typography component={Link}
-                    to="/components"
-                    variant="h6">
+                    <Button 
+                    onClick={componentsClickHandler}
+                    sx={{color: '#fff', fontWeight: '600', fontSize: '15px'}}>
                     Components
-                </Typography>
+                    </Button>
                 </Grid>
                 <Grid item mr={3}>
                 <ProfileMenu/>
