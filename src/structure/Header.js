@@ -16,10 +16,12 @@ const Header = () => {
 
     const productsClickHandler = () => {
         navigate('/')
+        window.location.reload()
     }
 
     const componentsClickHandler = () => {
         navigate('/components')
+        window.location.reload()
     }
 
     return(

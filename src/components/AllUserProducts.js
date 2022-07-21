@@ -22,7 +22,6 @@ const AllUserProducts = (props) => {
     //     <div>
     //       <Box textAlign="center" mt={15}>
     //         <CircularProgress 
-    //         centered
     //         sx={{ color: 'secondary.loading' }}/>
     //       </Box>
     //   </div>)

@@ -70,6 +70,11 @@ const Product = (props) => {
       return () => (mounted = false)
     },[currency])
 
+    const detailProductClickHandler = () => {
+      navigate(`/product/${props.product.id}`)
+      // window.location.reload()
+    }
+
     return(
       <div>
       { (props.componentName === 'productDetail') ? 
@@ -114,7 +119,7 @@ const Product = (props) => {
                 </Card>)
             : (props.componentName === 'allProducts') ?
             (<Card>
-                <CardActionArea onClick={() => {navigate(`/product/${props.product.id}`)}}>
+                <CardActionArea onClick={detailProductClickHandler}>
                         <CardContent>
                             <div>
                             <Typography variant="h6" gutterBottom>
