@@ -1,7 +1,7 @@
-import { Card, CardContent, CardActions, CardActionArea, List, ListItem, ListItemText, Typography, Button } from "@mui/material"
+import { Card, CardContent, CardActionArea, List, ListItem, ListItemText, Typography } from "@mui/material"
 import { useNavigate } from 'react-router'
 import useAxios from "../hooks/useAxios"
-import { useContext, useState, useEffect, useRef } from "react"
+import { useContext, useState, useEffect } from "react"
 import { CurrencyContext } from "../hooks/useCurrencyContext"
 
 const Product = (props) => {
@@ -32,13 +32,8 @@ const Product = (props) => {
           setInitPrice(value)
         }
       },[response])
-      
     }
     getPrice()
-
-    const [newPrice, setNewPrice] = useState()
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [error, setError] = useState(null)
 
     useEffect(() => {
       let mounted = true
@@ -57,7 +52,6 @@ const Product = (props) => {
         .then((res) => res.json())
         .then((result) => {
           if(mounted){
-            setIsLoaded(true)
             if(currency === 'EUR' && currencySwitched){
               setPrice(initPrice)
             }else 
@@ -70,44 +64,11 @@ const Product = (props) => {
               setPrice(value)
             }
           }
-        },
-        (error) => {
-          if (mounted){
-            setIsLoaded(true)
-            setError(error)
-          }
         })
       }
       getNewPrice()
       return () => (mounted = false)
     },[currency])
-        
-
-
-
-      //   const { response } = useAxios({
-      //     method: 'POST',
-      //     mode: 'cors',
-      //     url: '/currencyRequest',
-      //     data: {
-      //       "totalPrice": price,
-      //       "wantedCurrency": currency
-      //     }})
-
-      //   if(response !== null)
-      //   {
-          // var jsonStr = JSON.stringify(response)
-          // var value = ""
-          // for(var i = 14; i<jsonStr.length-24; i++){
-          //   value += jsonStr[i]
-          // }
-          // console.log("resvalue: "+value)
-          // setNewPrice(value)
-      //   }
-      // },[currency])
-    // }
-    // getNewPrice()
-
 
     return(
       <div>
@@ -145,7 +106,7 @@ const Product = (props) => {
                         </Typography>
                         <div style={{textAlign: 'right'}}>
                         <Typography variant="h6">
-                            Total Price of Product: {price}
+                            Total Price of Product: {price} {currency}
                         </Typography>
                         </div>
                         </div>
