@@ -25,7 +25,6 @@ const AllComponents = (props) => {
         return(
         <Box textAlign="center" mt={15}>
           <CircularProgress 
-          centered
           sx={{ color: 'secondary.loading' }}/>
         </Box>
           )
