@@ -29,6 +29,7 @@ export const currencies = [
 
 export const CurrencyContext = createContext({
     currency: {},
+    currencySwitched: {},
     changeCurrency: () => {},
 })
 
@@ -36,13 +37,15 @@ export const CurrencyContext = createContext({
 export const CurrencyCtxProvider = ({children}) => {
 
   const [currency, setCurrency] = useState("EUR")
+  const [currencySwitched, setCurrencySwitched] = useState(false)
+
   const changeCurrency = (currencyToChangeTo) =>{
-    setCurrency(currencyToChangeTo)
-    console.log("currencyToChangeTo: "+currencyToChangeTo)
+      setCurrency(currencyToChangeTo)
+      setCurrencySwitched(true)
   }
 
   return(
-    <CurrencyContext.Provider value={{currency, changeCurrency}}>
+    <CurrencyContext.Provider value={{currency, currencySwitched, changeCurrency}}>
       {children}
     </CurrencyContext.Provider>
   )

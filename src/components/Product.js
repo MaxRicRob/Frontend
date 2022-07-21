@@ -1,16 +1,17 @@
 import { Card, CardContent, CardActions, CardActionArea, List, ListItem, ListItemText, Typography, Button } from "@mui/material"
 import { useNavigate } from 'react-router'
 import useAxios from "../hooks/useAxios"
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState, useEffect, useRef } from "react"
 import { CurrencyContext } from "../hooks/useCurrencyContext"
 
 const Product = (props) => {
     
     let navigate = useNavigate()
-    const { currency } = useContext(CurrencyContext)
+    const { currency, currencySwitched } = useContext(CurrencyContext)
     let componentPrices = props.product.components.map((id) => id.price)
     const [price, setPrice] = useState("")
-    
+    const [initPrice, setInitPrice] = useState()
+
     const getPrice = () => {
       const { response } = useAxios({
         method: 'POST',
@@ -19,7 +20,6 @@ const Product = (props) => {
         data: {
           "prices": componentPrices
         }})
-  
       useEffect(() => {
         if(response !== null)
         {
@@ -28,43 +28,86 @@ const Product = (props) => {
           for(var i = 14; i<jsonStr.length-1; i++){
             value += jsonStr[i]
           }
-          setPrice(value)}
+          setPrice(value)
+          setInitPrice(value)
+        }
       },[response])
+      
     }
     getPrice()
 
-    const [newPrice, setNewPrice] = useState("")
+    const [newPrice, setNewPrice] = useState()
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [error, setError] = useState(null)
 
-    const getNewPrice = () => {
-
-      console.log("getNewPrice-price: "+price)
-      console.log("getNewPrice-currency: "+currency)
-
-      const { response } = useAxios({
-        method: 'POST',
-        mode: 'cors',
-        url: '/currencyRequest',
-        data: {
-          "totalPrice": price,
-          "wantedCurrency": currency
-        }})
-      console.log("response: "+response)
-  
-      useEffect(() => {
-        console.log("used effect")
-        if(response !== null)
-        {
-          var jsonStr = JSON.stringify(response)
-          var value = ""
-          for(var i = 14; i<jsonStr.length-24; i++){
-            value += jsonStr[i]
-          }
-          console.log("resvalue: "+value)
-          setPrice(value)
+    useEffect(() => {
+      let mounted = true
+      async function getNewPrice(){
+        const data = {
+          totalPrice: price,
+          wantedCurrency: currency
         }
-      },[response, currency])
-    }
-    getNewPrice()
+        const requestOptions = {
+          method: 'POST',
+          mode: 'cors',
+          headers: { "Content-Type": "application/json; charset=UTF-8" },
+          body: JSON.stringify(data)
+        }
+        fetch(`${props.baseURL}/currencyRequest`,requestOptions)
+        .then((res) => res.json())
+        .then((result) => {
+          if(mounted){
+            setIsLoaded(true)
+            if(currency === 'EUR' && currencySwitched){
+              setPrice(initPrice)
+            }else 
+            if (currency !== 'EUR' && currencySwitched){
+              var jsonStr = JSON.stringify(result)
+              var value = ""
+              for(var i = 14; i<jsonStr.length-24; i++){
+                value += jsonStr[i]
+              }
+              setPrice(value)
+            }
+          }
+        },
+        (error) => {
+          if (mounted){
+            setIsLoaded(true)
+            setError(error)
+          }
+        })
+      }
+      getNewPrice()
+      return () => (mounted = false)
+    },[currency])
+        
+
+
+
+      //   const { response } = useAxios({
+      //     method: 'POST',
+      //     mode: 'cors',
+      //     url: '/currencyRequest',
+      //     data: {
+      //       "totalPrice": price,
+      //       "wantedCurrency": currency
+      //     }})
+
+      //   if(response !== null)
+      //   {
+          // var jsonStr = JSON.stringify(response)
+          // var value = ""
+          // for(var i = 14; i<jsonStr.length-24; i++){
+          //   value += jsonStr[i]
+          // }
+          // console.log("resvalue: "+value)
+          // setNewPrice(value)
+      //   }
+      // },[currency])
+    // }
+    // getNewPrice()
+
 
     return(
       <div>
