@@ -1,5 +1,4 @@
-import { AppBar, Button,Toolbar, Typography, Grid, TextField, MenuItem } from "@mui/material"
-import { Link } from "react-router-dom"
+import { AppBar, Button,Toolbar, Grid, TextField, MenuItem } from "@mui/material"
 import { useContext } from "react"
 import ProfileMenu from "./ProfileMenu"
 import { currencies, CurrencyContext } from '../hooks/useCurrencyContext'
@@ -15,12 +14,12 @@ const Header = () => {
     }
 
     const fruitiliciousClickHandler = () => {
-        navigate('/')
+        navigate('/allproducts')
         window.location.reload()
     }
 
     const productsClickHandler = () => {
-        navigate('/')
+        navigate('/allproducts')
         window.location.reload()
     }
 

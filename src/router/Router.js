@@ -37,7 +37,7 @@ function Router(props, {setIsLoggedIn}) {
       <Routes>
         <Route
           exact
-          path="/login"
+          path="/"
           element={<LoginPage
             setIsLoggedIn={setIsLoggedIn}
             baseURL={baseURL} 
@@ -45,7 +45,7 @@ function Router(props, {setIsLoggedIn}) {
         />
         <Route
           exact
-          path="/"
+          path="/allproducts"
           element={<AllProductsPage
             defaultProducts={defaultProducts}
             isLoggedIn={props.isLoggedIn}

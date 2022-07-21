@@ -7,10 +7,11 @@ import { CurrencyContext } from "../hooks/useCurrencyContext"
 const Product = (props) => {
     
     let navigate = useNavigate()
-    const { currency, currencySwitched, setConvertedPrice, getConvertedPrice } = useContext(CurrencyContext)
+    const { currency, currencySwitched, changeCurrency } = useContext(CurrencyContext)
     let componentPrices = props.product.components.map((id) => id.price)
-    const [price, setPrice] = useState("")
+    const [price, setPrice] = useState()
     const [initPrice, setInitPrice] = useState()
+    const [detailPrice, setDetailPrice] = useState()
 
     const getPrice = () => {
       const { response } = useAxios({
@@ -54,6 +55,7 @@ const Product = (props) => {
           if(mounted){
             if(currency === 'EUR' && currencySwitched){
               setPrice(initPrice)
+              setDetailPrice(initPrice)
             }else 
             if (currency !== 'EUR' && currencySwitched){
               var jsonStr = JSON.stringify(result)
@@ -62,6 +64,7 @@ const Product = (props) => {
                 value += jsonStr[i]
               }
               setPrice(value)
+              setDetailPrice(value)
             }
           }
         })
@@ -72,6 +75,8 @@ const Product = (props) => {
 
     const detailProductClickHandler = () => {
       navigate(`/product/${props.product.id}`)
+      // setDetailPrice(price)
+      // changeCurrency('EUR')
     }
 
     return(
@@ -108,7 +113,7 @@ const Product = (props) => {
                             </List>
                         <div style={{textAlign: 'right'}}>
                         <Typography variant="h6">
-                            Total Price of Product: {price} {currency}
+                            Total Price of Product: {detailPrice} {currency}
                         </Typography>
                         </div>
                         </div>
