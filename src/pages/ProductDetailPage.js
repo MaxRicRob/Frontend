@@ -21,7 +21,6 @@ const ProductDetailPage = (props) => {
               baseURL={props.baseURL} 
               componentName={componentName}
               product={product}/>
-                {/*  */}
             </Box>
             <Footer/>
         </div>

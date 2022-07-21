@@ -7,7 +7,7 @@ import { CurrencyContext } from "../hooks/useCurrencyContext"
 const Product = (props) => {
     
     let navigate = useNavigate()
-    const { currency, currencySwitched } = useContext(CurrencyContext)
+    const { currency, currencySwitched, setConvertedPrice, getConvertedPrice } = useContext(CurrencyContext)
     let componentPrices = props.product.components.map((id) => id.price)
     const [price, setPrice] = useState("")
     const [initPrice, setInitPrice] = useState()
@@ -72,7 +72,6 @@ const Product = (props) => {
 
     const detailProductClickHandler = () => {
       navigate(`/product/${props.product.id}`)
-      // window.location.reload()
     }
 
     return(
@@ -85,12 +84,11 @@ const Product = (props) => {
                           {props.product.name}
                         </Typography>
                         </div>
-                        <div style={{textAlign: 'left'}}>
-                        <Typography variant="body1" gutterBottom>
+                        <div style={{textAlign: 'left', marginLeft: '5px'}}>
                             Product Components: 
                            <List>
                            {props.product.components.map((component) => (
-                            <ListItem alignItems="flex-start">
+                            <ListItem key={component.id} alignItems="flex-start">
                               <ListItemText
                               primary={component.name}
                               secondary={
@@ -108,7 +106,6 @@ const Product = (props) => {
                             </ListItem>
                           ))}  
                             </List>
-                        </Typography>
                         <div style={{textAlign: 'right'}}>
                         <Typography variant="h6">
                             Total Price of Product: {price} {currency}

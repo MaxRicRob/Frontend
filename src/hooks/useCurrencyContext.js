@@ -33,7 +33,6 @@ export const CurrencyContext = createContext({
     changeCurrency: () => {},
 })
 
-
 export const CurrencyCtxProvider = ({children}) => {
 
   const [currency, setCurrency] = useState("EUR")
