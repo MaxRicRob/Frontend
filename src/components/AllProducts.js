@@ -7,7 +7,7 @@ import useAxios from "../hooks/useAxios"
 const AllProducts = (props) => {
 
     const componentName = 'allProducts'
-    console.log(componentName)
+
     const [products, setProducts] = useState([])
     const { response, loading, error } = useAxios({
       method: 'GET',
@@ -41,7 +41,8 @@ const AllProducts = (props) => {
           </Grid>
         ))} 
       </Grid>
-    )}
+    )
+  }
 }
 
 export default AllProducts

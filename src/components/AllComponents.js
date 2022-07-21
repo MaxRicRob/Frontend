@@ -5,7 +5,8 @@ import _ from "lodash"
 import useAxios from "../hooks/useAxios"
 
 const AllComponents = (props) => {
-
+  
+    const componentName = 'allComponents'
     const [components, setComponents] = useState([])
     const { response, loading, error } = useAxios({
       method: 'get',
@@ -17,6 +18,8 @@ const AllComponents = (props) => {
       if(response!==null)
       setComponents(response)
     },[response])
+
+    console.log("Allcomponents "+components)
 
     if (error) {
         return <div>Error: {error.message}</div>
@@ -34,7 +37,10 @@ const AllComponents = (props) => {
         {components.map((component) => (
           <Grid item key={component.id} xs={12} sm={6} md={4} lg={4}>
             <Box mt={12} ml={5} mr={5}>
-              <Component baseURL={props.baseURL} component={component}/>
+              <Component 
+              baseURL={props.baseURL} 
+              component={component} 
+              componentName={componentName}/>
             </Box>
           </Grid>
         ))} 

@@ -8,6 +8,7 @@ import ComponentDetailPage from '../pages/ComponentDetailPage'
 import AllUserProductsPage from '../pages/AllUserProductsPage'
 import UserProductDetailPage from '../pages/UserProductDetailPage'
 import useAxios from "../hooks/useAxios"
+import useGetComponents from '../hooks/useGetComponents'
 
 function Router(props, {setIsLoggedIn}) {
 
@@ -15,7 +16,7 @@ function Router(props, {setIsLoggedIn}) {
 
   const [defaultProducts, setDefaultProducts] = useState([])
   
-  const { response, loading, error } = useAxios({
+  const { response } = useAxios({
     method: 'GET',
     mode: 'cors',
     url: '/defaultProducts'
@@ -25,9 +26,15 @@ function Router(props, {setIsLoggedIn}) {
     if(response !== null){
     setDefaultProducts(response)}
   },[response])
+
+  const [defaultComponents, setDefaultComponents] = useState([])
+  const { getComponentsResponse } = useGetComponents()
+
+  useEffect(() => {
+    if(getComponentsResponse!==null)
+    setDefaultComponents(getComponentsResponse)
+  },[getComponentsResponse])
   
-
-
   return (
     <BrowserRouter>
       <Routes>
@@ -43,6 +50,7 @@ function Router(props, {setIsLoggedIn}) {
           exact
           path="/"
           element={<AllProductsPage
+            defaultProducts={defaultProducts}
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
@@ -68,6 +76,7 @@ function Router(props, {setIsLoggedIn}) {
           exact
           path="/component/:id"
           element={<ComponentDetailPage
+            defaultComponents={defaultComponents}
             isLoggedIn={props.isLoggedIn}
             baseURL={baseURL} 
             />}
