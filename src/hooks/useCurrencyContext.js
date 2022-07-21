@@ -22,7 +22,7 @@ export const currencies = [
       label: '¥',
     },
     {
-      value: 'POUND',
+      value: 'PND',
       label: '£',
     }
   ]
@@ -38,6 +38,7 @@ export const CurrencyCtxProvider = ({children}) => {
   const [currency, setCurrency] = useState("EUR")
   const changeCurrency = (currencyToChangeTo) =>{
     setCurrency(currencyToChangeTo)
+    console.log("currencyToChangeTo: "+currencyToChangeTo)
   }
 
   return(

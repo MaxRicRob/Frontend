@@ -21,11 +21,6 @@ const Component = (props) => {
                              </Typography>
                                  </div>
                              </div>
-                             <Typography
-                               variant="body2"
-                               color="textSecondary">
-                                Description: ... 
-                             </Typography>
                          </CardContent>
                     </CardActionArea>
                 </Card>

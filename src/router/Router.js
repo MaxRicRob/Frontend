@@ -15,13 +15,11 @@ function Router(props, {setIsLoggedIn}) {
   const baseURL = "http://localhost:8085"
 
   const [defaultProducts, setDefaultProducts] = useState([])
-  
   const { response } = useAxios({
     method: 'GET',
     mode: 'cors',
     url: '/defaultProducts'
   })
-
   useEffect(() => {
     if(response !== null){
     setDefaultProducts(response)}
@@ -29,7 +27,6 @@ function Router(props, {setIsLoggedIn}) {
 
   const [defaultComponents, setDefaultComponents] = useState([])
   const { getComponentsResponse } = useGetComponents()
-
   useEffect(() => {
     if(getComponentsResponse!==null)
     setDefaultComponents(getComponentsResponse)
@@ -100,7 +97,6 @@ function Router(props, {setIsLoggedIn}) {
       </Routes>
     </BrowserRouter>
   )
-
 }
 
 export default Router

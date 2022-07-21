@@ -33,34 +33,38 @@ const Product = (props) => {
     }
     getPrice()
 
+    const [newPrice, setNewPrice] = useState("")
 
-    // useEffect(() => {
-    // let mounted = true
-    // async function getCurrency() {
-    //   fetch(`${props.baseURL}/currencyRequest`,{
-    //     method: 'POST',
-    //     mode: 'cors',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //       totalPrice: price,
-    //       wantedCurrency: currency
-    //     })
-    //   })
-    //     .then((result) => {
-    //       if(result !== null && mounted)
-    //       {
-    //         var jsonStr = JSON.stringify(result)
-    //         var value = ""
-    //         for(var i = 14; i<jsonStr.length-1; i++){
-    //           value += jsonStr[i]
-    //         }
-    //         setPrice(value)}
-    //         console.log("value: "+value)
-    //       }
-    //     )
-    // } getCurrency()
-    // return () => (mounted = false) //cleanup function
-    // }, [currency])
+    const getNewPrice = () => {
+
+      console.log("getNewPrice-price: "+price)
+      console.log("getNewPrice-currency: "+currency)
+
+      const { response } = useAxios({
+        method: 'POST',
+        mode: 'cors',
+        url: '/currencyRequest',
+        data: {
+          "totalPrice": price,
+          "wantedCurrency": currency
+        }})
+      console.log("response: "+response)
+  
+      useEffect(() => {
+        console.log("used effect")
+        if(response !== null)
+        {
+          var jsonStr = JSON.stringify(response)
+          var value = ""
+          for(var i = 14; i<jsonStr.length-24; i++){
+            value += jsonStr[i]
+          }
+          console.log("resvalue: "+value)
+          setPrice(value)
+        }
+      },[response, currency])
+    }
+    getNewPrice()
 
     return(
       <div>

@@ -19,8 +19,6 @@ const AllComponents = (props) => {
       setComponents(response)
     },[response])
 
-    console.log("Allcomponents "+components)
-
     if (error) {
         return <div>Error: {error.message}</div>
       } else if (loading) {
