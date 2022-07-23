@@ -11,10 +11,8 @@ import AddUserProduct from "../components/AddUserProduct"
 const AllUserProductsPage = (props) => {
 
     const baseURL = props.baseURL
-    const [error, setError] = useState(null)
-    const [isLoaded, setIsLoaded] = useState(false)
     const { id } = useParams() //gets userID from current route
-
+    
     const filteredUserProducts = mockUserProducts.userproducts.filter(userProducts => userProducts.id === id);
     console.log("userProducts: "+filteredUserProducts)
 
