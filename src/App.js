@@ -4,11 +4,9 @@ import { CurrencyCtxProvider } from './hooks/useCurrencyContext'
 
 const App = () => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     return(
         <CurrencyCtxProvider>
-            <Router isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+            <Router/>
         </CurrencyCtxProvider>
     )
 }

@@ -10,9 +10,11 @@ import UserProductDetailPage from '../pages/UserProductDetailPage'
 import useAxios from "../hooks/useAxios"
 import useGetComponents from '../hooks/useGetComponents'
 
-function Router(props, {setIsLoggedIn}) {
+function Router() {
 
   const baseURL = "http://localhost:8085"
+  const [loggedUser, setLoggedUser] = useState("bob")
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [defaultProducts, setDefaultProducts] = useState([])
   const { response } = useAxios({
@@ -31,6 +33,15 @@ function Router(props, {setIsLoggedIn}) {
     if(getComponentsResponse!==null)
     setDefaultComponents(getComponentsResponse)
   },[getComponentsResponse])
+
+  const defaultProps = {
+    setIsLoggedIn,
+    baseURL,
+    loggedUser, 
+    defaultProducts,
+    defaultComponents,
+    isLoggedIn
+  }
   
   return (
     <BrowserRouter>
@@ -38,61 +49,37 @@ function Router(props, {setIsLoggedIn}) {
         <Route
           exact
           path="/"
-          element={<LoginPage
-            setIsLoggedIn={setIsLoggedIn}
-            baseURL={baseURL} 
-            />}
+          element={<LoginPage {...defaultProps} />}
         />
         <Route
           exact
           path="/allproducts"
-          element={<AllProductsPage
-            defaultProducts={defaultProducts}
-            isLoggedIn={props.isLoggedIn}
-            baseURL={baseURL} 
-            />}
+          element={<AllProductsPage {...defaultProps} />}
         />
         <Route
           exact
           path="/product/:id"
-          element={<ProductDetailPage
-            defaultProducts={defaultProducts}
-            isLoggedIn={props.isLoggedIn}
-            baseURL={baseURL} 
-            />}
+          element={<ProductDetailPage {...defaultProps} />}
         />
         <Route
           exact
           path="/components"
-          element={<AllComponentsPage
-            isLoggedIn={props.isLoggedIn}
-            baseURL={baseURL} 
-            />}
+          element={<AllComponentsPage {...defaultProps} />}
         />
         <Route
           exact
           path="/component/:id"
-          element={<ComponentDetailPage
-            defaultComponents={defaultComponents}
-            isLoggedIn={props.isLoggedIn}
-            baseURL={baseURL} 
-            />}
+          element={<ComponentDetailPage {...defaultProps} />}
         />
         <Route
           exact
           path="/userproducts/:id"
-          element={<AllUserProductsPage
-            isLoggedIn={props.isLoggedIn}
-            baseURL={baseURL} 
-            />}
+          element={<AllUserProductsPage {...defaultProps} />}
         />
         <Route
           exact
           path="/userproduct/:id"
-          element={<UserProductDetailPage
-            isLoggedIn={props.isLoggedIn}
-            baseURL={baseURL} 
-            />}
+          element={<UserProductDetailPage {...defaultProps} />}
         />
       </Routes>
     </BrowserRouter>

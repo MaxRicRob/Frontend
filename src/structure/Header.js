@@ -4,7 +4,7 @@ import ProfileMenu from "./ProfileMenu"
 import { currencies, CurrencyContext } from '../hooks/useCurrencyContext'
 import { useNavigate } from 'react-router'
 
-const Header = () => {
+const Header = (props) => {
 
     let navigate = useNavigate()
     const { currency, changeCurrency } = useContext(CurrencyContext)
@@ -75,7 +75,7 @@ const Header = () => {
                     </Button>
                 </Grid>
                 <Grid item mr={3}>
-                <ProfileMenu/>
+                <ProfileMenu loggedUser={props.loggedUser}/>
                 </Grid>
             </Grid>
             </Toolbar>

@@ -11,6 +11,7 @@ const useAxios = (params) => {
     const fetchData = async (params) => {
     try {
       const res = await axios.request(params);
+      await axios.response("Access-Control-Allow-Origin", "*")
       setResponse(res.data);
       setError(null);
     } catch (err) {

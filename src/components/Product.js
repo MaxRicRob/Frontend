@@ -1,4 +1,4 @@
-import { Card, CardContent, CardActionArea, List, ListItem, ListItemText, Typography } from "@mui/material"
+import { Card, CardContent, CardActionArea, Container, List, ListItem, ListItemText, Typography } from "@mui/material"
 import { useNavigate } from 'react-router'
 import useAxios from "../hooks/useAxios"
 import { useContext, useState, useEffect } from "react"
@@ -80,7 +80,7 @@ const Product = (props) => {
     }
 
     return(
-      <div>
+      <Container>
       { (props.componentName === 'productDetail') ? 
         (<Card>
                     <CardContent>
@@ -118,8 +118,8 @@ const Product = (props) => {
                         </div>
                         </div>
                     </CardContent>
-                </Card>)
-            : (props.componentName === 'allProducts') ?
+                </Card>
+            ) : (props.componentName === 'allProducts') ?
             (<Card>
                 <CardActionArea onClick={detailProductClickHandler}>
                         <CardContent>
@@ -138,7 +138,7 @@ const Product = (props) => {
             </Card>)
             : <></>
       }
-      </div>
+      </Container>
     )
 }
 

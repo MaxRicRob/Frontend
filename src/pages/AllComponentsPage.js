@@ -22,7 +22,7 @@ const AllComponentsPage = (props) => {
 
     return ( 
         <div>
-           <Header isLoggedIn={props.isLoggedIn}/>
+           <Header isLoggedIn={props.isLoggedIn} loggedUser={props.loggedUser}/>
             { (error)?(
                   <div>Error: {error.message}</div>
                   ) : (loading)? (

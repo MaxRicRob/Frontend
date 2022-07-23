@@ -14,7 +14,11 @@ const AllProductsPage = (props) => {
     const [products, setProducts] = useState([])
     const { response, loading, error } = useAxios({
       method: 'GET',
-      mode: 'cors',
+      // mode: 'cors',
+      // headers: {
+      //   'Access-Control-Allow-Origin': '*'
+      // },
+      credentials: 'include',
       url: '/defaultProducts'
     })
 
@@ -23,9 +27,11 @@ const AllProductsPage = (props) => {
         setProducts(response)
     },[response])
 
+    console.log("props.loggedUser: "+props.loggedUser)
+
     return(
         <div>
-           <Header isLoggedIn={props.isLoggedIn}/>
+           <Header isLoggedIn={props.isLoggedIn} loggedUser={props.loggedUser}/>
             {(error)?(
                 <div>Error: {error.message}</div>
                 ) : (loading)? (

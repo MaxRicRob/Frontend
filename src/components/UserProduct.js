@@ -1,9 +1,9 @@
-import { Card, CardContent, CardActionArea, IconButton, Typography } from "@mui/material"
+import { Box, Card, CardContent, CardActionArea, IconButton, Typography, Container } from "@mui/material"
 import { useNavigate } from 'react-router'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit';
 
-const UserProduct = ({product}) => {
+const UserProduct = (props) => {
     
     let navigate = useNavigate()
 
@@ -16,37 +16,63 @@ const UserProduct = ({product}) => {
     }
 
     return(
-        <Card>
-            <CardActionArea onClick={() => {navigate(`/userproduct/${product.id}`)}}>
+        <Container>
+        { (props.componentName === 'allUserProducts') ?
+        (<Card>
+            <CardActionArea onClick={() => {navigate(`/userproduct/${props.product.id}`)}}>
                     <CardContent>
-                        <div>
+                        <Box>
                         <Typography variant="h6" gutterBottom>
-                            {product.name}
+                            {props.product.name}
                         </Typography>
-                            <div style={{textAlign: 'right'}}>
+                            <Box sx={{textAlign: 'right'}}>
                         <Typography variant="h6">
                           Price
                         </Typography>
-                            </div>
-                        </div>
-                        <div>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                        >Description
-                        </Typography>
-                        <div style={{textAlign: 'right'}}>
-                            <IconButton>
-                                <EditIcon onClick={editButtonHandler}/>
+                            </Box>
+                        </Box>
+                        <Box>
+                        <Box style={{textAlign: 'right'}}>
+                            <IconButton onClick={editButtonHandler}>
+                                <EditIcon />
                             </IconButton>
-                            <IconButton>
-                                <DeleteIcon onClick={deleteButtonHandler}/>
+                            <IconButton onClick={deleteButtonHandler}>
+                                <DeleteIcon />
                             </IconButton>
-                        </div>
-                        </div>
+                        </Box>
+                        </Box>
                     </CardContent>
             </CardActionArea>
         </Card>
+        ) : (props.componentName === 'userProductDetail') ? 
+        (<Box mt={12} ml={10} mr={10}>
+                <Card>
+                    <CardContent>
+                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                            Picture
+                        <Typography variant="h5" gutterBottom>
+                            {props.product.name}
+                        </Typography>
+                        </div>
+                        <div style={{textAlign: 'right'}}>
+                        <Typography variant="body1" gutterBottom>
+                            {props.product.description}
+                        </Typography>
+                        </div>
+                        <div style={{textAlign: 'left'}}>
+                        <Typography variant="body1" gutterBottom>
+                            Product Components: x, y, z
+                        </Typography>
+                        <Typography variant="h6">
+                            Price
+                        </Typography>
+                        </div>
+                    </CardContent>
+                </Card>
+            </Box>) 
+            : <></>
+        }
+        </Container>
     )
 }
 

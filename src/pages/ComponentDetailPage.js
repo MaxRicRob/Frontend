@@ -13,7 +13,7 @@ const ComponentDetailPage = (props) => {
     
     return ( 
         <div>
-            <Header isLoggedIn={props.isLoggedIn}/>
+            <Header isLoggedIn={props.isLoggedIn} loggedUser={props.loggedUser}/>
             <Box mt={12} ml={10} mr={10}>
                 <Component 
                 baseURL={props.baseURL} 

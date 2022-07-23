@@ -85,10 +85,6 @@ function LoginPage(props) {
             >
               Sign In
             </Button>
-            <br/>
-            <Link href="#" variant="body1" color="#357a38">
-                  {"Don't have an account? Sign Up"}
-            </Link>
             </Box>
         </div>
       </div>
