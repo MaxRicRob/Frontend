@@ -49,7 +49,7 @@ function LoginPage(props) {
 
   return (
   <body class="h-screen bg-stone-200 bg-cover">
-      <div class="flex shadow-lg absolute md:inset-20 lg:inset-40 bg-green-100 rounded-xl overflow-hidden min-w-fit">
+      <div class="flex shadow-lg absolute md:inset-40 lg:inset-40 bg-green-100 rounded-xl overflow-hidden min-w-fit">
         <div class="shrink-0">
           <img src={fruitImg} alt="fruits"/>
         </div>
