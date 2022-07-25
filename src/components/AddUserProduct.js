@@ -28,6 +28,24 @@ const AddUserProduct = (props) => {
         setProductName(enteredText)
     }
 
+    const createProductHandler = () => {
+        const data = {
+            "name": productName,
+            "userName": props.user,
+            "components": checkedComponents
+          }
+        const requestOptions = {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+        fetch(`${props.baseURL}/products`, requestOptions)
+          .then((response) => response.json())
+          .then((res) => res.status === "200")
+          .then(props.setAddedProduct(true))
+    }
+
     return ( 
         <Card>
             <CardContent>
@@ -48,6 +66,7 @@ const AddUserProduct = (props) => {
                             Add a New Product
                         </Typography>
                         <TextField
+                        required
                         variant="standard"
                         label="Name:"
                         type="text"
@@ -57,9 +76,11 @@ const AddUserProduct = (props) => {
                             <Typography>
                                 Choose components:
                             </Typography>
-                            <ComponentsList setCheckedComponents={setCheckedComponents}/>
+                            <ComponentsList 
+                            setCheckedComponents={setCheckedComponents}/>
                             <Box mt={2}>
-                                <Button 
+                                <Button
+                                onClick={createProductHandler} 
                                 variant="contained" 
                                 color="success">
                                     Create Product</Button>
