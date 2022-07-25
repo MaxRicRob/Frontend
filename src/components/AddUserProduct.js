@@ -1,7 +1,7 @@
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Box, Button, Card, CardContent, IconButton, Modal, TextField, Typography} from "@mui/material"
-import { useState } from 'react';
-import ComponentsList from './ComponentsList';
+import { useState } from 'react'
+import ComponentsList from './ComponentsList'
 
 const style = {
     position: 'absolute',
@@ -14,12 +14,19 @@ const style = {
     boxShadow: 24,
     p: 4,
     textAlign: 'center'
-  };
+  }
 
-const AddUserProduct = () => {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+const AddUserProduct = (props) => {
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
+    const [productName, setProductName] = useState()
+    const [checkedComponents, setCheckedComponents] = useState([])
+
+    const handleNameInputChange = (e) =>{
+        const enteredText = e.target.value
+        setProductName(enteredText)
+    }
 
     return ( 
         <Card>
@@ -44,12 +51,13 @@ const AddUserProduct = () => {
                         variant="standard"
                         label="Name:"
                         type="text"
+                        onChange={handleNameInputChange}
                         />
                         <Box mt={3}>
                             <Typography>
                                 Choose components:
                             </Typography>
-                            <ComponentsList/>
+                            <ComponentsList setCheckedComponents={setCheckedComponents}/>
                             <Box mt={2}>
                                 <Button 
                                 variant="contained" 
@@ -67,7 +75,7 @@ const AddUserProduct = () => {
                 </div>
             </CardContent>
         </Card>
-     );
+     )
 }
  
-export default AddUserProduct;
+export default AddUserProduct

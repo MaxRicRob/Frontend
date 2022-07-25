@@ -8,7 +8,7 @@ import useAxios from "../hooks/useAxios"
 
 const AllComponentsPage = (props) => {
     const componentName = 'allComponents'
-    const [components, setComponents] = useState([])
+    const [defaultComponents, setDefaultComponents] = useState([])
     const { response, loading, error } = useAxios({
       method: 'get',
       mode: 'cors',
@@ -17,7 +17,7 @@ const AllComponentsPage = (props) => {
 
     useEffect(() => {
       if(response!==null)
-      setComponents(response)
+      setDefaultComponents(response)
     },[response])
 
     return ( 
@@ -32,7 +32,7 @@ const AllComponentsPage = (props) => {
                   </Box>
                ) : (
                   <Grid container justify="center">
-                  {components.map((component) => (
+                  {defaultComponents.map((component) => (
                     <Grid item key={component.id} xs={12} sm={6} md={4} lg={4}>
                       <Box mt={12} ml={5} mr={5}>
                         <Component 

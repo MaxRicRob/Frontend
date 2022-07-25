@@ -13,7 +13,7 @@ import useGetComponents from '../hooks/useGetComponents'
 function Router() {
 
   const baseURL = "http://localhost:8085"
-  const [loggedUser, setLoggedUser] = useState("bob")
+  const [loggedUser, setLoggedUser] = useState("bob")   //change later
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [defaultProducts, setDefaultProducts] = useState([])

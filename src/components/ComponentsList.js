@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Avatar, Checkbox, List,ListItem, ListItemButton, ListItemText, ListItemAvatar,  } from '@mui/material'
+import useAxios from "../hooks/useAxios"
 
-const ComponentsList = () => {
+const ComponentsList = (props) => {
   const [checked, setChecked] = useState([])
-
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value)
     const newChecked = [...checked]
@@ -14,12 +14,26 @@ const ComponentsList = () => {
       newChecked.splice(currentIndex, 1)
     }
     setChecked(newChecked)
+    props.setCheckedComponents(newChecked)
+    console.log("checked: "+checked.length)
   }
+
+  const [defaultComponents, setDefaultComponents] = useState([])
+    const { response, loading, error } = useAxios({
+      method: 'get',
+      mode: 'cors',
+      url: '/productComponents'
+    })
+
+    useEffect(() => {
+      if(response!==null)
+      setDefaultComponents(response)
+    },[response])
 
   return (
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value}`
+      {defaultComponents.map((value) => {
+        const labelId = value.id
         return (
           <ListItem
             key={value}
@@ -28,19 +42,17 @@ const ComponentsList = () => {
                 edge="end"
                 onChange={handleToggle(value)}
                 checked={checked.indexOf(value) !== -1}
-                inputProps={{ 'aria-labelledby': labelId }}
+                color='success'
+                // inputProps={{ 'aria-labelledby': labelId }}
               />
             }
             disablePadding
           >
             <ListItemButton>
-              <ListItemAvatar>
-                <Avatar
-                  alt={`Avatar n°${value + 1}`}
-                  src={`/static/images/avatar/${value + 1}.jpg`}
-                />
-              </ListItemAvatar>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText 
+              id={`component-text-${labelId}`}
+              onClick={handleToggle(value)} 
+              primary={value.name} />
             </ListItemButton>
           </ListItem>
         )
