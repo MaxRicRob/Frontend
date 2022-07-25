@@ -36,7 +36,7 @@ const ComponentsList = (props) => {
         const labelId = value.id
         return (
           <ListItem
-            key={value}
+            key={value.id}
             secondaryAction={
               <Checkbox
                 edge="end"
