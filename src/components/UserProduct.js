@@ -16,7 +16,7 @@ const UserProduct = (props) => {
     const [price, setPrice] = useState()
     const [initPrice, setInitPrice] = useState()
     const [detailPrice, setDetailPrice] = useState()  
-    const {deleteProduct} = useDeleteProduct()
+    // const {deleteProduct} = useDeleteProduct()
 
     const getPrice = () => {
         const { response } = useAxios({
@@ -83,15 +83,15 @@ const UserProduct = (props) => {
        
     }
 
-    const deleteButtonHandler = () => {
-        deleteProduct({
-            method: 'DELETE',
-            mode: 'cors',
-            headers: { "Content-Type": "application/json; charset=UTF-8" },
-            url: '/products/'+props.product.id
-        })
-        props.setDeletedProduct(true)
-    }
+    // const deleteButtonHandler = () => {
+    //     deleteProduct({
+    //         method: 'DELETE',
+    //         mode: 'cors',
+    //         headers: { "Content-Type": "application/json; charset=UTF-8" },
+    //         url: '/products/'+props.product.id
+    //     })
+    //     props.setDeletedProduct(true)
+    // }
 
     return(
         <Container>
@@ -117,7 +117,7 @@ const UserProduct = (props) => {
                             <IconButton onClick={editButtonHandler}>
                                 <EditIcon />
                             </IconButton>
-                            <IconButton onClick={deleteButtonHandler}>
+                            <IconButton onClick={() => props.deleteButtonHandler(props.product.id)}>
                                 <DeleteIcon />
                             </IconButton>
             </Box>

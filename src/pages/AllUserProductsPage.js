@@ -6,38 +6,44 @@ import { useState, useEffect } from 'react'
 import _ from "lodash"
 import { useParams } from "react-router"
 import AddUserProduct from "../components/AddUserProduct"
-import useAxios from "../hooks/useAxios"
+import useDeleteProduct from "../hooks/useDeleteProduct"
+import useGetUserProducts from "../hooks/useGetUserProducts"
+import useAddProduct from "../hooks/useAddProduct"
 
 const AllUserProductsPage = (props) => {
 
     const { id } = useParams() //gets userID from current route
     const componentName = 'allUserProducts'
-    const [addedProduct, setAddedProduct] = useState(false)
-    const [deletedProduct, setDeletedProduct] = useState(false)
-
     const [userProducts, setUserProducts] = useState([])
-    const { response, loading, error } = useAxios({
-      method: 'GET',
-      mode: 'cors',
-      url: '/products/'+id
-    })
+    const {getUserProductsResponse, getUserProductsError, getUserProductsLoading, getUserProducts} = useGetUserProducts()
+    const {deleteProduct} = useDeleteProduct()
+    const {addProductResponse, addProduct} = useAddProduct()
 
     useEffect(() => {
-      if(response !== null)
-        setUserProducts(response)
-    },[response])
-
+      getUserProducts(id)
+    },[])
+    
     useEffect(() => {
-      setAddedProduct(false)
-      setDeletedProduct(false) 
-    },[addedProduct, deletedProduct])
+      if(getUserProductsResponse !== null)
+        setUserProducts(getUserProductsResponse)
+    },[getUserProductsResponse])
+
+    const onDelete = (id) => {
+      deleteProduct(id)
+      getUserProducts(id)
+    }
+
+    const onAdd = (data) => {
+      addProduct(data)
+      getUserProducts(id)
+    }
 
     return(
         <div>
            <Header isLoggedIn={props.isLoggedIn} loggedUser={props.loggedUser}/>
-           { (error)?(
+           { (getUserProductsError)?(
                   <div>Error: {error.message}</div>
-                  ) : (loading)? (
+                  ) : (getUserProductsLoading)? (
                   <Box textAlign="center" mt={15}>
                     <CircularProgress 
                     sx={{ color: 'secondary.loading' }}/>
@@ -52,7 +58,7 @@ const AllUserProductsPage = (props) => {
                        product={product} 
                        componentName={componentName}  
                        baseURL={props.baseURL}
-                       setDeletedProduct={setDeletedProduct}/>
+                       deleteButtonHandler={onDelete}/>
                     </Box>
                   </Grid>
                 ))}
@@ -61,11 +67,11 @@ const AllUserProductsPage = (props) => {
                 <AddUserProduct 
                 baseURL={props.baseURL} 
                 user={id} 
-                setAddedProduct={setAddedProduct}/>
+                addProductHandler={onAdd}/>
               </Box>
             </Grid> 
             </Grid> 
-            )}
+            )} 
            <Footer/>
         </div>
     )    

@@ -3,16 +3,19 @@ import { useState, useEffect } from "react";
 
 axios.defaults.baseURL = "http://localhost:8085"
 
-const useDeleteProduct = (params) => {
-    const [response, setResponse] = useState(null);
+const useDeleteProduct = () => {
+    const [deleteResponse, setDeleteResponse] = useState(null);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 
-    const deleteProduct = async (params) => {
+    const deleteProduct = async (id) => {
     try {
-      const res = await axios.request(params);
-      setResponse(res.data);
-      setError(null);
+      const res = await axios.delete('/products/'+id,{
+        headers:{ 
+          mode: 'cors',
+          "Content-Type": "application/json; charset=UTF-8"}
+      });
+      setDeleteResponse(res.data);
     } catch (err) {
       setError(err);
     } finally {
@@ -20,11 +23,7 @@ const useDeleteProduct = (params) => {
     }
   };
 
-//   useEffect(() => {
-//     fetchData(params);
-//   }, []);
-
-  return {response, error, loading, deleteProduct};
+  return {deleteResponse, error, loading, deleteProduct};
 }
  
-export default useDeleteProduct;
+export default useDeleteProduct

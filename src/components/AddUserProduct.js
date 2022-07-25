@@ -28,22 +28,10 @@ const AddUserProduct = (props) => {
         setProductName(enteredText)
     }
 
-    const createProductHandler = () => {
-        const data = {
-            "name": productName,
-            "userName": props.user,
-            "components": checkedComponents
-          }
-        const requestOptions = {
-          method: "POST",
-          mode: "cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-        fetch(`${props.baseURL}/products`, requestOptions)
-          .then((response) => response.json())
-          .then((res) => res.status === "200")
-          .then(props.setAddedProduct(true))
+    const data = {
+        "name": productName,
+        "userName": props.user,
+        "components": checkedComponents
     }
 
     return ( 
@@ -80,7 +68,7 @@ const AddUserProduct = (props) => {
                             setCheckedComponents={setCheckedComponents}/>
                             <Box mt={2}>
                                 <Button
-                                onClick={createProductHandler} 
+                                onClick={() => props.addProductHandler(data)} 
                                 variant="contained" 
                                 color="success">
                                     Create Product</Button>
