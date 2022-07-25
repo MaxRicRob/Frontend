@@ -14,11 +14,13 @@ const AllProductsPage = (props) => {
     const [products, setProducts] = useState([])
     const { response, loading, error } = useAxios({
       method: 'GET',
-      // mode: 'cors',
-      // headers: {
-      //   'Access-Control-Allow-Origin': '*'
+      mode: 'cors',
+      // headers: {   // tried different headers for CORS-problem with keycloak
+      //   "Access-Control-Allow-Origin": "*",
+      //   'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept",
+        // 'Content-Type': 'application/json'
       // },
-      credentials: 'include',
+      // credentials: 'include',
       url: '/defaultProducts'
     })
 

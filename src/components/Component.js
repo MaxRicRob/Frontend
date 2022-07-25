@@ -2,6 +2,7 @@ import { Card, CardContent, CardActionArea, Grid, ListItem, ListItemText, Typogr
 import { useNavigate } from 'react-router'
 import { CurrencyContext } from "../hooks/useCurrencyContext"
 import {useContext, useState, useEffect} from 'react'
+import Numeral from 'react-numeral'
 
 const Component = (props) => {
     
@@ -63,7 +64,7 @@ const Component = (props) => {
                              </Typography>
                                  <div style={{textAlign: 'right'}}>
                              <Typography variant="h6">
-                                 {price} {currency}
+                             <Numeral value={price/100} format={'0.00'}/> {currency}
                              </Typography>
                                  </div>
                              </div>
@@ -108,7 +109,7 @@ const Component = (props) => {
                         </div>
                         <div style={{textAlign: 'center', marginTop: 10}}>
                         <Typography variant="h6">
-                            Price: {price} {currency}
+                            Price: <Numeral value={price/100} format={'0.00'}/> {currency}
                         </Typography>
                         </div>
                     </CardContent>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import useAxios from "../hooks/useAxios"
 import { useContext, useState, useEffect } from "react"
 import { CurrencyContext } from "../hooks/useCurrencyContext"
+import Numeral from 'react-numeral'
 
 const Product = (props) => {
     
@@ -11,7 +12,6 @@ const Product = (props) => {
     let componentPrices = props.product.components.map((id) => id.price)
     const [price, setPrice] = useState()
     const [initPrice, setInitPrice] = useState()
-    const [detailPrice, setDetailPrice] = useState()
 
     const getPrice = () => {
       const { response } = useAxios({
@@ -55,7 +55,6 @@ const Product = (props) => {
           if(mounted){
             if(currency === 'EUR' && currencySwitched){
               setPrice(initPrice)
-              setDetailPrice(initPrice)
             }else 
             if (currency !== 'EUR' && currencySwitched){
               var jsonStr = JSON.stringify(result)
@@ -64,7 +63,6 @@ const Product = (props) => {
                 value += jsonStr[i]
               }
               setPrice(value)
-              setDetailPrice(value)
             }
           }
         })
@@ -75,7 +73,6 @@ const Product = (props) => {
 
     const detailProductClickHandler = () => {
       navigate(`/product/${props.product.id}`)
-      // setDetailPrice(price)
       // changeCurrency('EUR')
     }
 
@@ -113,7 +110,7 @@ const Product = (props) => {
                             </List>
                         <div style={{textAlign: 'right'}}>
                         <Typography variant="h6">
-                            Total Price of Product: {detailPrice} {currency}
+                            Total Price of Product: <Numeral value={price/100} format={'0.00'}/> {currency}
                         </Typography>
                         </div>
                         </div>
@@ -129,7 +126,7 @@ const Product = (props) => {
                             </Typography>
                                 <div style={{textAlign: 'right'}}>
                             <Typography variant="h6">
-                                {price} {currency}
+                            <Numeral value={price/100} format={'0.00'}/> {currency}
                             </Typography>
                                 </div>
                             </div>
