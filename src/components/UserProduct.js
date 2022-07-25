@@ -102,17 +102,17 @@ const UserProduct = (props) => {
                             </Box>
                         </Box>
                         <Box>
-                        <Box style={{textAlign: 'right'}}>
+                        </Box>
+                    </CardContent>
+            </CardActionArea>
+            <Box sx={{textAlign: 'right', padding: '10px'}}>
                             <IconButton onClick={editButtonHandler}>
                                 <EditIcon />
                             </IconButton>
                             <IconButton onClick={deleteButtonHandler}>
                                 <DeleteIcon />
                             </IconButton>
-                        </Box>
-                        </Box>
-                    </CardContent>
-            </CardActionArea>
+            </Box>
         </Card>
         ) : (props.componentName === 'userProductDetail') ? 
         (<Box mt={12} ml={10} mr={10}>
