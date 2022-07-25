@@ -6,6 +6,7 @@ import { useContext, useState, useEffect } from "react"
 import { CurrencyContext } from "../hooks/useCurrencyContext"
 import useAxios from "../hooks/useAxios"
 import Numeral from 'react-numeral'
+import useDeleteProduct from "../hooks/useDeleteProduct"
 
 const UserProduct = (props) => {
     
@@ -15,6 +16,7 @@ const UserProduct = (props) => {
     const [price, setPrice] = useState()
     const [initPrice, setInitPrice] = useState()
     const [detailPrice, setDetailPrice] = useState()  
+    const {deleteProduct} = useDeleteProduct()
 
     const getPrice = () => {
         const { response } = useAxios({
@@ -78,11 +80,17 @@ const UserProduct = (props) => {
 
 
     const editButtonHandler = (e) => {
-        //edit user product
+       
     }
 
-    const deleteButtonHandler = (e) => {
-        //delete user product
+    const deleteButtonHandler = () => {
+        deleteProduct({
+            method: 'DELETE',
+            mode: 'cors',
+            headers: { "Content-Type": "application/json; charset=UTF-8" },
+            url: '/products/'+props.product.id
+        })
+        props.setDeletedProduct(true)
     }
 
     return(

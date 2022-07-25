@@ -12,6 +12,8 @@ const AllUserProductsPage = (props) => {
 
     const { id } = useParams() //gets userID from current route
     const componentName = 'allUserProducts'
+    const [addedProduct, setAddedProduct] = useState(false)
+    const [deletedProduct, setDeletedProduct] = useState(false)
 
     const [userProducts, setUserProducts] = useState([])
     const { response, loading, error } = useAxios({
@@ -24,6 +26,11 @@ const AllUserProductsPage = (props) => {
       if(response !== null)
         setUserProducts(response)
     },[response])
+
+    useEffect(() => {
+      setAddedProduct(false)
+      setDeletedProduct(false) 
+    },[addedProduct, deletedProduct])
 
     return(
         <div>
@@ -44,13 +51,17 @@ const AllUserProductsPage = (props) => {
                        key={product.id} 
                        product={product} 
                        componentName={componentName}  
-                       baseURL={props.baseURL}/>
+                       baseURL={props.baseURL}
+                       setDeletedProduct={setDeletedProduct}/>
                     </Box>
                   </Grid>
                 ))}
             <Grid item xs={12} sm={6} md={4} lg={4}>
               <Box mt={12} ml={5} mr={5}>
-                <AddUserProduct/>
+                <AddUserProduct 
+                baseURL={props.baseURL} 
+                user={id} 
+                setAddedProduct={setAddedProduct}/>
               </Box>
             </Grid> 
             </Grid> 

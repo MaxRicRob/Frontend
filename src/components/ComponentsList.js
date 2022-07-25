@@ -6,6 +6,7 @@ const ComponentsList = (props) => {
   const [checked, setChecked] = useState([])
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value)
+    console.log("currentIndex: "+currentIndex)
     const newChecked = [...checked]
 
     if (currentIndex === -1) {
@@ -15,7 +16,7 @@ const ComponentsList = (props) => {
     }
     setChecked(newChecked)
     props.setCheckedComponents(newChecked)
-    console.log("checked: "+checked.length)
+    console.log("newChecked.len: "+newChecked)
   }
 
   const [defaultComponents, setDefaultComponents] = useState([])
@@ -25,10 +26,10 @@ const ComponentsList = (props) => {
       url: '/productComponents'
     })
 
-    useEffect(() => {
-      if(response!==null)
-      setDefaultComponents(response)
-    },[response])
+  useEffect(() => {
+    if(response!==null)
+    setDefaultComponents(response)
+  },[response])
 
   return (
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -43,7 +44,6 @@ const ComponentsList = (props) => {
                 onChange={handleToggle(value)}
                 checked={checked.indexOf(value) !== -1}
                 color='success'
-                // inputProps={{ 'aria-labelledby': labelId }}
               />
             }
             disablePadding

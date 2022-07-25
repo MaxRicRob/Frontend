@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 
 axios.defaults.baseURL = "http://localhost:8085"
 
-const useAxios = (params) => {
+const useDeleteProduct = (params) => {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 
-    const fetchData = async (params) => {
+    const deleteProduct = async (params) => {
     try {
       const res = await axios.request(params);
       setResponse(res.data);
@@ -20,11 +20,11 @@ const useAxios = (params) => {
     }
   };
 
-  useEffect(() => {
-    fetchData(params);
-  }, []);
+//   useEffect(() => {
+//     fetchData(params);
+//   }, []);
 
-  return {response, error, loading, fetchData};
+  return {response, error, loading, deleteProduct};
 }
  
-export default useAxios;
+export default useDeleteProduct;
