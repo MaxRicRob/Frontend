@@ -33,15 +33,16 @@ const AllUserProductsPage = (props) => {
     const {deleteResponse, deleteProduct} = useDeleteProduct()
     const {addProductResponse, addProduct} = useAddProduct()
 
+    // get all user products
     useEffect(() => {
       getUserProducts(id)
     },[])
-    
     useEffect(() => {
       if(getUserProductsResponse !== null)
         setUserProducts(getUserProductsResponse)
     },[getUserProductsResponse])
 
+    //add user product
     const onAdd = (data) => {
       addProduct(data)
     }
@@ -50,6 +51,7 @@ const AllUserProductsPage = (props) => {
         getUserProducts(id)
     },[addProductResponse])
 
+    // delete user product
     const onDelete = (id) => {
       deleteProduct(id)
       getUserProducts(id)
@@ -90,7 +92,7 @@ const AllUserProductsPage = (props) => {
                   </Box>
                ) : (
             <Grid container justify="center">
-                {props.userProducts.map((product) => (
+                {userProducts.map((product) => (
                   <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
                     <Box mt={12} ml={5} mr={5}>
                        <UserProduct 

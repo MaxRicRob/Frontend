@@ -35,7 +35,7 @@ function Router() {
     setDefaultComponents(getComponentsResponse)
   },[getComponentsResponse])
 
-  const { getUserProductsResponse, getUserProductsError, getUserProductsLoading, getUserProducts} = useGetUserProducts()
+  const { getUserProductsResponse, getUserProducts} = useGetUserProducts()
   const [userProducts, setUserProducts] = useState([])
 
   useEffect(() => {
