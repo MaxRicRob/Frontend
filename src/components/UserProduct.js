@@ -15,7 +15,6 @@ const UserProduct = (props) => {
     const [price, setPrice] = useState()
     const [initPrice, setInitPrice] = useState()
     const [detailPrice, setDetailPrice] = useState()  
-    // const {deleteProduct} = useDeleteProduct()
 
     const getPrice = () => {
         const { response } = useAxios({
