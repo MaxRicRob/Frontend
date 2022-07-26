@@ -34,6 +34,11 @@ const AddUserProduct = (props) => {
         "components": checkedComponents
     }
 
+    const onClickHandler = () => {
+        props.addProductHandler(data)
+        handleClose()
+    }
+
     return ( 
         <Card>
             <CardContent>
@@ -68,7 +73,7 @@ const AddUserProduct = (props) => {
                             setCheckedComponents={setCheckedComponents}/>
                             <Box mt={2}>
                                 <Button
-                                onClick={() => props.addProductHandler(data)} 
+                                onClick={onClickHandler} 
                                 variant="contained" 
                                 color="success">
                                     Create Product</Button>
