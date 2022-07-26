@@ -28,9 +28,7 @@ const AllProductsPage = (props) => {
       if(response !== null)
         setProducts(response)
     },[response])
-
-    console.log("props.loggedUser: "+props.loggedUser)
-
+    
     return(
         <div>
            <Header isLoggedIn={props.isLoggedIn} loggedUser={props.loggedUser}/>

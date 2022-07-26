@@ -9,6 +9,7 @@ import AllUserProductsPage from '../pages/AllUserProductsPage'
 import UserProductDetailPage from '../pages/UserProductDetailPage'
 import useAxios from "../hooks/useAxios"
 import useGetComponents from '../hooks/useGetComponents'
+import useGetUserProducts from '../hooks/useGetUserProducts'
 
 function Router() {
 
@@ -33,6 +34,18 @@ function Router() {
     if(getComponentsResponse!==null)
     setDefaultComponents(getComponentsResponse)
   },[getComponentsResponse])
+
+  const { getUserProductsResponse, getUserProductsError, getUserProductsLoading, getUserProducts} = useGetUserProducts()
+  const [userProducts, setUserProducts] = useState([])
+
+  useEffect(() => {
+    getUserProducts(loggedUser)
+  },[])
+
+  useEffect(()=>{
+    if(getUserProductsResponse !== null)
+    setUserProducts(getUserProductsResponse)
+  },[getUserProductsResponse])
 
   const defaultProps = {
     setIsLoggedIn,
@@ -74,12 +87,14 @@ function Router() {
         <Route
           exact
           path="/userproducts/:id"
-          element={<AllUserProductsPage {...defaultProps} />}
+          element={<AllUserProductsPage {...defaultProps} 
+          userProducts={userProducts}/>}
         />
         <Route
           exact
           path="/userproduct/:id"
-          element={<UserProductDetailPage {...defaultProps} />}
+          element={<UserProductDetailPage {...defaultProps} 
+          userProducts={userProducts}/>}
         />
       </Routes>
     </BrowserRouter>

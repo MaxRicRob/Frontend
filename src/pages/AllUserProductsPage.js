@@ -9,7 +9,6 @@ import AddUserProduct from "../components/AddUserProduct"
 import useDeleteProduct from "../hooks/useDeleteProduct"
 import useGetUserProducts from "../hooks/useGetUserProducts"
 import useAddProduct from "../hooks/useAddProduct"
-import EditUserProduct from "../components/EditUserProduct"
 import ComponentsList from "../components/ComponentsList"
 
 const modalStyle = {
@@ -58,8 +57,8 @@ const AllUserProductsPage = (props) => {
 
     useEffect(() => {
       if(deleteResponse !== null)
-        getUserProducts(id)
-    },[deleteResponse])
+         getUserProducts(id)
+    },[deleteResponse])    
 
     const [openModal, setOpenModal] = useState(false)
     const handleOpenModal = () => setOpenModal(true)
@@ -68,7 +67,6 @@ const AllUserProductsPage = (props) => {
     const [checkedComponents, setCheckedComponents] = useState([])
     const [checkedForEditing, setCheckedForEditing] = useState([])
     
-
     const handleProductNameInputChange = (e) =>{
       const enteredText = e.target.value
       setProductName(enteredText)
@@ -92,7 +90,7 @@ const AllUserProductsPage = (props) => {
                   </Box>
                ) : (
             <Grid container justify="center">
-                {userProducts.map((product) => (
+                {props.userProducts.map((product) => (
                   <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
                     <Box mt={12} ml={5} mr={5}>
                        <UserProduct 
