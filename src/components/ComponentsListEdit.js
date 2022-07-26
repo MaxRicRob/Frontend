@@ -41,6 +41,7 @@ const ComponentsListEdit = (props) => {
           console.log("used effect")
           defaultComponents.forEach(value =>setComponentsAlreadyChecked(prev => [...prev,value]))
           console.log("componentsAlreadyChecked: "+componentsAlreadyChecked)
+          setChecked(componentsAlreadyChecked)
         // }
       } catch (error) {
         console.log(error)

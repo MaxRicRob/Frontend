@@ -11,6 +11,7 @@ import useGetUserProducts from "../hooks/useGetUserProducts"
 import useAddProduct from "../hooks/useAddProduct"
 import ComponentsList from "../components/ComponentsList"
 import ComponentsListEdit from "../components/ComponentsListEdit"
+import useUpdateProduct from "../hooks/useUpdateProduct"
 
 import mockedUserProducts from "../mock_api/mock_userproducts.json"
 
@@ -35,6 +36,7 @@ const AllUserProductsPage = (props) => {
     // const {getUserProductsResponse, getUserProductsError, getUserProductsLoading, getUserProducts} = useGetUserProducts()
     // const {deleteResponse, deleteProduct} = useDeleteProduct()
     // const {addProductResponse, addProduct} = useAddProduct()
+    // const {updateProductResponse, updateProduct}= useUpdateProduct()
 
     useEffect(()=> {
       setUserProducts(mockedUserProducts.userproducts)
@@ -86,6 +88,18 @@ const AllUserProductsPage = (props) => {
       console.log("checkedComponents: "+checkedComponents)
       // console.log("userProd empty?: "+userProducts[1].components[0].name !== '')
     }
+
+    // to be tested with real API 
+    // const [updatedProduct, setUpdatedProduct] = useState([])
+
+    // const onSubmitUpdateProduct = (data) => {
+      // updateProduct(data)
+    // }
+
+      // useEffect(() => {
+    //   if(updateProductResponse !== null)
+    //     getUserProducts(id)
+    // },[updateProductResponse])
 
     return(
         <div>
