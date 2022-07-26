@@ -13,7 +13,8 @@ import useGetUserProducts from '../hooks/useGetUserProducts'
 
 function Router() {
 
-  const baseURL = "http://localhost:8085"
+  // const baseURL = "http://localhost:8085"    // for docker api
+  const baseURL = "http://localhost:3002" // mock-api
   const [loggedUser, setLoggedUser] = useState("bob")   //change later
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

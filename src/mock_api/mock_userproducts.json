@@ -1,9 +1,9 @@
 {
-    "userproducts" : [
+    "userproducts": [
     {
       "id": "ba8fb812-b71f-4395-ba1e-07946e652dee",
       "name": "Bester Korb",
-      "userName": "BioHans",
+      "userName": "bob",
       "totalPrice": 100,
       "components": [
         {
@@ -33,10 +33,10 @@
       ]
     },
     {
-      "id": "ba8fb812-b71f-4395-ba1e-07946e652dee",
-      "name": "Sehr nicer Korb",
-      "userName": "BioHans",
-      "totalPrice": 200,
+      "id": "95e373d8-566d-4536-8c2c-17935f955508",
+      "name": "Bester Korb2",
+      "userName": "bob",
+      "totalPrice": 100,
       "components": [
         {
             "id": "2b004b5c-97c2-46e7-9ddc-ace22837b601",
@@ -62,38 +62,6 @@
             "organic": true,
             "calories": 89
           }
-      ]
-    },
-    {
-      "id": "d8c93f68-e0a6-473d-a8bc-40c782241d62",
-      "name": "Sau leckerer Bucket",
-      "userName": "Sarafina",
-      "totalPrice": 100,
-      "components": [
-        {
-          "id": "2b004b5c-97c2-46e7-9ddc-ace22837b601",
-          "name": "apple",
-          "price": 0.9,
-          "weight": 1,
-          "color": "green",
-          "origin": "Poland",
-          "awesomeness": 7,
-          "farmer": "Dimitri",
-          "organic": false,
-          "calories": 50
-        },
-        {
-          "id": "41786ce3-868b-4de1-af71-c78e150a56d0",
-          "name": "banana",
-          "price": 1.5,
-          "weight": 1,
-          "color": "yellow",
-          "origin": "Australia",
-          "awesomeness": 7,
-          "farmer": "Bob",
-          "organic": true,
-          "calories": 89
-        }
       ]
     }
   ]

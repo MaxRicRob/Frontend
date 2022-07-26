@@ -24,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch src/mock_api/mock_db.json --port 3002"
+    "server": "json-server --watch src/mock_api/mock_db.json --port 3002",
+    "routes": "json-server --watch src/mock_api/mock_db.json --port 3002 --routes src/mock_api/routes.json"
   },
   "eslintConfig": {
     "extends": [

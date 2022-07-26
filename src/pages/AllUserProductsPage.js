@@ -10,6 +10,9 @@ import useDeleteProduct from "../hooks/useDeleteProduct"
 import useGetUserProducts from "../hooks/useGetUserProducts"
 import useAddProduct from "../hooks/useAddProduct"
 import ComponentsList from "../components/ComponentsList"
+import ComponentsListEdit from "../components/ComponentsListEdit"
+
+import mockedUserProducts from "../mock_api/mock_userproducts.json"
 
 const modalStyle = {
   position: 'absolute',
@@ -29,38 +32,42 @@ const AllUserProductsPage = (props) => {
     const { id } = useParams() //gets userID from current route
     const componentName = 'allUserProducts'
     const [userProducts, setUserProducts] = useState([])
-    const {getUserProductsResponse, getUserProductsError, getUserProductsLoading, getUserProducts} = useGetUserProducts()
-    const {deleteResponse, deleteProduct} = useDeleteProduct()
-    const {addProductResponse, addProduct} = useAddProduct()
+    // const {getUserProductsResponse, getUserProductsError, getUserProductsLoading, getUserProducts} = useGetUserProducts()
+    // const {deleteResponse, deleteProduct} = useDeleteProduct()
+    // const {addProductResponse, addProduct} = useAddProduct()
 
-    // get all user products
-    useEffect(() => {
-      getUserProducts(id)
+    useEffect(()=> {
+      setUserProducts(mockedUserProducts.userproducts)
     },[])
-    useEffect(() => {
-      if(getUserProductsResponse !== null)
-        setUserProducts(getUserProductsResponse)
-    },[getUserProductsResponse])
 
+    // get all user products  // deactivated for testing purpose
+    // useEffect(() => {
+    //   getUserProducts(id)
+    // },[])
+    // useEffect(() => {
+    //   if(getUserProductsResponse !== null)
+    //     setUserProducts(getUserProductsResponse)
+    // },[getUserProductsResponse])
+    
     //add user product
-    const onAdd = (data) => {
-      addProduct(data)
-    }
-    useEffect(() => {
-      if(addProductResponse !== null)
-        getUserProducts(id)
-    },[addProductResponse])
+    // const onAdd = (data) => {
+    //   addProduct(data)
+    // }
+    // useEffect(() => {
+    //   if(addProductResponse !== null)
+    //     getUserProducts(id)
+    // },[addProductResponse])
 
     // delete user product
-    const onDelete = (id) => {
-      deleteProduct(id)
-      getUserProducts(id)
-    }
+    // const onDelete = (id) => {
+    //   deleteProduct(id)
+    //   getUserProducts(id)
+    // }
 
-    useEffect(() => {
-      if(deleteResponse !== null)
-         getUserProducts(id)
-    },[deleteResponse])    
+    // useEffect(() => {
+    //   if(deleteResponse !== null)
+    //      getUserProducts(id)
+    // },[deleteResponse])    
 
     const [openModal, setOpenModal] = useState(false)
     const handleOpenModal = () => setOpenModal(true)
@@ -83,15 +90,16 @@ const AllUserProductsPage = (props) => {
     return(
         <div>
            <Header isLoggedIn={props.isLoggedIn} loggedUser={props.loggedUser}/>
-           { (getUserProductsError)?(
-                  <div>Error: {error.message}</div>
+           {/* { (getUserProductsError)?(
+                  <div>Error: {getUserProductsError.message}</div>
                   ) : (getUserProductsLoading)? (
                   <Box textAlign="center" mt={15}>
                     <CircularProgress 
                     sx={{ color: 'secondary.loading' }}/>
                   </Box>
-               ) : (
+               ) : ( */}
             <Grid container justify="center">
+                {/* {userProducts.map((product) => ( */}
                 {userProducts.map((product) => (
                   <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
                     <Box mt={12} ml={5} mr={5}>
@@ -100,7 +108,7 @@ const AllUserProductsPage = (props) => {
                        product={product} 
                        componentName={componentName}  
                        baseURL={props.baseURL}
-                       deleteButtonHandler={onDelete}
+                      //  deleteButtonHandler={onDelete}
                        editButtonHandler={onEdit}
                        />
                     </Box>
@@ -128,7 +136,7 @@ const AllUserProductsPage = (props) => {
                             <Typography>
                                 Change components:
                             </Typography>
-                            <ComponentsList 
+                            <ComponentsListEdit 
                             key={product.id}
                             setCheckedComponents={setCheckedComponents}
                             product={product}/>
@@ -149,11 +157,12 @@ const AllUserProductsPage = (props) => {
                 <AddUserProduct 
                 baseURL={props.baseURL} 
                 user={id} 
-                addProductHandler={onAdd}/>
+                // addProductHandler={onAdd}
+                />
               </Box>
             </Grid> 
             </Grid> 
-            )} 
+            {/* )}  */}
            <Footer/>
         </div>
     )    
