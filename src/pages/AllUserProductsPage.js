@@ -1,8 +1,8 @@
 import Header from "../structure/Header"
 import Footer from "../structure/Footer"
-import { Box, CircularProgress, Grid} from "@mui/material"
+import { Box, Button, CircularProgress, Modal, Grid, TextField, Typography} from "@mui/material"
 import UserProduct from "../components/UserProduct"
-import { useState, useEffect, useRef, createRef } from 'react'
+import { useState, useEffect} from 'react'
 import _ from "lodash"
 import { useParams } from "react-router"
 import AddUserProduct from "../components/AddUserProduct"
@@ -10,6 +10,20 @@ import useDeleteProduct from "../hooks/useDeleteProduct"
 import useGetUserProducts from "../hooks/useGetUserProducts"
 import useAddProduct from "../hooks/useAddProduct"
 import EditUserProduct from "../components/EditUserProduct"
+import ComponentsList from "../components/ComponentsList"
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  textAlign: 'center'
+}
 
 const AllUserProductsPage = (props) => {
 
@@ -32,17 +46,10 @@ const AllUserProductsPage = (props) => {
     const onAdd = (data) => {
       addProduct(data)
     }
-
     useEffect(() => {
       if(addProductResponse !== null)
         getUserProducts(id)
     },[addProductResponse])
-
-    const editUserProductRef = createRef()
-
-    const onEdit = () => {
-      editUserProductRef.current()
-    }
 
     const onDelete = (id) => {
       deleteProduct(id)
@@ -53,6 +60,25 @@ const AllUserProductsPage = (props) => {
       if(deleteResponse !== null)
         getUserProducts(id)
     },[deleteResponse])
+
+    const [openModal, setOpenModal] = useState(false)
+    const handleOpenModal = () => setOpenModal(true)
+    const handleCloseModal = () => setOpenModal(false)
+    const [productName, setProductName] = useState()
+    const [checkedComponents, setCheckedComponents] = useState([])
+    const [checkedForEditing, setCheckedForEditing] = useState([])
+    
+
+    const handleProductNameInputChange = (e) =>{
+      const enteredText = e.target.value
+      setProductName(enteredText)
+    }
+
+    const onEdit = () => {
+      handleOpenModal()
+      console.log("checkedComponents: "+checkedComponents)
+      // console.log("userProd empty?: "+userProducts[1].components[0].name !== '')
+    }
 
     return(
         <div>
@@ -78,10 +104,44 @@ const AllUserProductsPage = (props) => {
                        editButtonHandler={onEdit}
                        />
                     </Box>
-                    <EditUserProduct
-                    key={product.id}
-                    product={product}
-                    ref={editUserProductRef}/>
+                    <Modal
+                    open={openModal}
+                    onClose={handleCloseModal}
+                    aria-labelledby="modal-modal-title">
+                    <Box sx={modalStyle}>
+                        <Typography 
+                        id="modal-modal-title" 
+                        variant="h6" 
+                        component="h2"
+                        gutterBottom>
+                            Edit Product
+                        </Typography>
+                        <TextField
+                        required
+                        variant="standard"
+                        label="Name:"
+                        type="text"
+                        value={product.name}
+                        onChange={handleProductNameInputChange}
+                        />
+                        <Box mt={3}>
+                            <Typography>
+                                Change components:
+                            </Typography>
+                            <ComponentsList 
+                            key={product.id}
+                            setCheckedComponents={setCheckedComponents}
+                            product={product}/>
+                            <Box mt={2}>
+                                <Button
+                                // onClick={} 
+                                variant="contained" 
+                                color="success">
+                                    Submit Changes</Button>
+                            </Box>
+                        </Box>
+                    </Box>
+                    </Modal>
                   </Grid>
                 ))}
             <Grid item xs={12} sm={6} md={4} lg={4}>

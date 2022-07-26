@@ -22,6 +22,7 @@ const AddUserProduct = (props) => {
     const handleClose = () => setOpen(false)
     const [productName, setProductName] = useState()
     const [checkedComponents, setCheckedComponents] = useState([])
+    const [product,setProduct] = useState([])
 
     const handleNameInputChange = (e) =>{
         const enteredText = e.target.value
@@ -70,7 +71,8 @@ const AddUserProduct = (props) => {
                                 Choose components:
                             </Typography>
                             <ComponentsList 
-                            setCheckedComponents={setCheckedComponents}/>
+                            setCheckedComponents={setCheckedComponents}
+                            product={product}/>
                             <Box mt={2}>
                                 <Button
                                 onClick={onClickHandler} 

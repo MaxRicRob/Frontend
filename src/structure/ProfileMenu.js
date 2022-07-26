@@ -19,7 +19,7 @@ const ProfileMenu = (props) => {
         setAnchorEl(null)
         navigate('/login')
     }
-    console.log("profile-loggeduser: "+props.loggedUser)
+    // console.log("profile-loggeduser: "+props.loggedUser)
 
     const navigateToUserProductsHandler = () => {
         setAnchorEl(null)
