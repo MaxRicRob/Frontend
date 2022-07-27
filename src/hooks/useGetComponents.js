@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-// axios.defaults.baseURL = "http://localhost:8085"    // for docker api
-axios.defaults.baseURL = "http://localhost:3002"  // mock-api
+ axios.defaults.baseURL = "http://localhost:8085"    // for docker api
+//axios.defaults.baseURL = "http://localhost:3002"  // mock-api
 
 const useGetComponents = () => {
     const [getComponentsResponse, setGetComponentsResponse] = useState(null);

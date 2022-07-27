@@ -20,7 +20,9 @@ function LoginPage(props) {
   };
 
   const loginHandler = () => {
-    const enteredMail = email;
+
+    window.open("http://localhost:8080/realms/SpringBootKeycloak/protocol/openid-connect/auth?response_type=code&client_id=login-app&redirect_uri=http%3A%2F%2Flocalhost%3A8085%2Fsso%2Flogin&state=472eec38-1517-41fa-b053-86112ad77caf&login=true&scope=openid");
+    /*const enteredMail = email;
     const enteredPassword = password;
     const payload = {
       email: enteredMail,
@@ -44,7 +46,7 @@ function LoginPage(props) {
           props.setIsLoggedIn(false);
           return false;
         }
-      })
+      })*/
   }
 
   return (

@@ -11,50 +11,26 @@ const AllProductsPage = (props) => {
 
     const componentName = 'allProducts'
 
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState({__html: ""})
     const { response, loading, error } = useAxios({
       method: 'GET',
       mode: 'cors',
-      // headers: {   // tried different headers for CORS-problem with keycloak
+       headers: {   // tried different headers for CORS-problem with keycloak
       //   "Access-Control-Allow-Origin": "*",
       //   'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept",
-        // 'Content-Type': 'application/json'
-      // },
+         'Content-Type': 'application/json'
+      },
       // credentials: 'include',
-      url: '/defaultProducts'
+      url: '/allproducts'
     })
 
     useEffect(() => {
       if(response !== null)
-        setProducts(response)
+        setProducts({__html: response})
     },[response])
     
     return(
-        <div>
-           <Header isLoggedIn={props.isLoggedIn} loggedUser={props.loggedUser}/>
-            {(error)?(
-                <div>Error: {error.message}</div>
-                ) : (loading)? (
-                    <Box textAlign="center" mt={15}>
-                      <CircularProgress 
-                      sx={{ color: 'secondary.loading' }}/>
-                    </Box>
-                ) : (
-                    <Grid container justify="center">
-                      {products.map((product) => (
-                        <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
-                          <Box mt={12} ml={5} mr={5}>
-                            <Product 
-                            key={product.id} 
-                            baseURL={props.baseURL}
-                            product={product} 
-                            componentName={componentName}/>
-                          </Box>
-                        </Grid>
-                      ))} 
-                    </Grid>
-                  )}
-           <Footer/>
+        <div dangerouslySetInnerHTML={products}>
         </div>
     )
 }
