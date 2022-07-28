@@ -9,7 +9,7 @@ import AddUserProduct from "../components/AddUserProduct"
 import useDeleteProduct from "../hooks/useDeleteProduct"
 import useGetUserProducts from "../hooks/useGetUserProducts"
 import useAddProduct from "../hooks/useAddProduct"
-import ComponentsListEdit from "../components/ComponentsListEdit"
+import ComponentsListAdd from "../components/ComponentsListEdit"
 
 const modalStyle = {
   position: 'absolute',
@@ -66,7 +66,6 @@ const AllUserProductsPage = (props) => {
     const handleOpenModal = () => setOpenModal(true)
     const handleCloseModal = () => setOpenModal(false)
     const [productName, setProductName] = useState()
-    const [checkedComponents, setCheckedComponents] = useState([])
     const [checkedForEditing, setCheckedForEditing] = useState([])
     
     const handleProductNameInputChange = (e) =>{
@@ -74,10 +73,20 @@ const AllUserProductsPage = (props) => {
       setProductName(enteredText)
     }
 
+    // checked component of edit modal
+    const [checkedComponents, setCheckedComponents] = useState([])
+    const productUpdateData = {
+      "name": productName,
+      "components": checkedComponents
+  }
+
     const onEdit = () => {
       handleOpenModal()
-      console.log("checkedComponents: "+checkedComponents)
-      // console.log("userProd empty?: "+userProducts[1].components[0].name !== '')
+    }
+
+    const onClickSubmitEdit = () => {
+      //updateProduct(productUpdateData)
+      handleCloseModal()
     }
 
     return(
@@ -93,7 +102,8 @@ const AllUserProductsPage = (props) => {
                ) : (
             <Grid container justify="center">
                 {userProducts.map((product) => (
-                  <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
+                  <Grid item 
+                  key={product.id} xs={12} sm={6} md={4} lg={4}>
                     <Box mt={12} ml={5} mr={5}>
                        <UserProduct 
                        key={product.id} 
@@ -103,7 +113,7 @@ const AllUserProductsPage = (props) => {
                        deleteButtonHandler={onDelete}
                        editButtonHandler={onEdit}
                        />
-                    </Box>
+                      </Box>
                     <Modal
                     open={openModal}
                     onClose={handleCloseModal}
@@ -114,27 +124,25 @@ const AllUserProductsPage = (props) => {
                         variant="h6" 
                         component="h2"
                         gutterBottom>
-                            Edit Product
+                            Edit Product:
                         </Typography>
                         <TextField
                         required
                         variant="standard"
-                        label="Name:"
+                        label="New Name:"
                         type="text"
-                        value={product.name}
                         onChange={handleProductNameInputChange}
                         />
                         <Box mt={3}>
                             <Typography>
-                                Change components:
+                                New components:
                             </Typography>
-                            <ComponentsListEdit 
-                            key={product.id}
+                            <ComponentsListAdd 
                             setCheckedComponents={setCheckedComponents}
                             product={product}/>
                             <Box mt={2}>
                                 <Button
-                                // onClick={} 
+                                onClick={onClickSubmitEdit} 
                                 variant="contained" 
                                 color="success">
                                     Submit Changes</Button>

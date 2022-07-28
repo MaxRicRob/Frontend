@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react'
-import { Avatar, Checkbox, List,ListItem, ListItemButton, ListItemText, ListItemAvatar,  } from '@mui/material'
+import { Checkbox, List,ListItem, ListItemButton, ListItemText} from '@mui/material'
 import useAxios from "../hooks/useAxios"
 
 const ComponentsListAdd = (props) => {
   const [checked, setChecked] = useState([])
+
   const handleToggleAddProduct = (value) => () => {
     const currentIndex = checked.indexOf(value)
-    console.log("currentIndex: "+currentIndex)
     const newChecked = [...checked]
-
-    console.log("newCheck "+newChecked)
-
     if (currentIndex === -1) {
       newChecked.push(value)
     } else {

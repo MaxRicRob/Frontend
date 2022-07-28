@@ -80,6 +80,11 @@ const UserProduct = (props) => {
         return () => (mounted = false)
       },[currency])
 
+    const onClickHandler = () => {
+      props.editButtonHandler()
+      console.log("clicked: "+props.product.id)
+    }
+
     return(
         <Container>
         { (props.componentName === 'allUserProducts') ?
@@ -101,7 +106,7 @@ const UserProduct = (props) => {
                     </CardContent>
             </CardActionArea>
             <Box sx={{textAlign: 'right', padding: '10px'}}>
-                            <IconButton onClick={() => props.editButtonHandler()}>
+                            <IconButton onClick={onClickHandler}>
                                 <EditIcon />
                             </IconButton>
                             <IconButton onClick={() => props.deleteButtonHandler(props.product.id)}>
