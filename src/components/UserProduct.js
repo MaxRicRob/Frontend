@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardActionArea, IconButton, Typography, Container } from "@mui/material"
+import { Box, Card, CardContent, CardActionArea, IconButton, List, ListItem, ListItemText, Typography, Container } from "@mui/material"
 import { useNavigate } from 'react-router'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
@@ -11,10 +11,14 @@ const UserProduct = (props) => {
     
     let navigate = useNavigate()
     const { currency, currencySwitched, changeCurrency } = useContext(CurrencyContext)
-    let componentPrices = props.product.components.map((id) => id.price)
+    
+    if(props.product.components !== undefined){
+      var productComponents = props.product.components
+      var componentPrices = productComponents.map((id) => id.price)
+    }
+
     const [price, setPrice] = useState()
     const [initPrice, setInitPrice] = useState()
-    const [detailPrice, setDetailPrice] = useState()  
 
     const getPrice = () => {
         const { response } = useAxios({
@@ -110,23 +114,41 @@ const UserProduct = (props) => {
                 <Card>
                     <CardContent>
                         <div style={{display: "flex", justifyContent: "space-between"}}>
-                            Picture
                         <Typography variant="h5" gutterBottom>
-                            {props.product.name}
+                          {props.product.name}
                         </Typography>
                         </div>
+                        <div style={{textAlign: 'left', marginLeft: '5px'}}>
+                            Product Components: 
+                           <List>
+                            {
+                            (productComponents !== undefined) ? (
+                              productComponents.map((component) => (
+                                <ListItem key={component.id} alignItems="flex-start">
+                                  <ListItemText
+                                  primary={component.name}
+                                  secondary={
+                                    "ID: "+component.id+", "+
+                                    "Color: "+component.color+", "+ 
+                                    "Farmer: "+component.farmer+", "+
+                                    "Organic: "+component.organic+", "+
+                                    "Awesomeness: "+component.awesomeness+", "+
+                                    "Origin: "+component.origin+", "+
+                                    "Calories: "+component.calories+", "+
+                                    "Weight: "+component.weight+", "+
+                                    "Price: "+component.price
+                                  }
+                                  />
+                                </ListItem>
+                                ))
+                                ) : <></> 
+                                }  
+                            </List>
                         <div style={{textAlign: 'right'}}>
-                        <Typography variant="body1" gutterBottom>
-                            {props.product.description}
+                        <Typography variant="h6">
+                            Total Price of Product: <Numeral value={price/100} format={'0.00'}/> {currency}
                         </Typography>
                         </div>
-                        <div style={{textAlign: 'left'}}>
-                        <Typography variant="body1" gutterBottom>
-                            Product Components: x, y, z
-                        </Typography>
-                        <Typography variant="h6">
-                            Price
-                        </Typography>
                         </div>
                     </CardContent>
                 </Card>

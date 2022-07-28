@@ -9,7 +9,7 @@ import AddUserProduct from "../components/AddUserProduct"
 import useDeleteProduct from "../hooks/useDeleteProduct"
 import useGetUserProducts from "../hooks/useGetUserProducts"
 import useAddProduct from "../hooks/useAddProduct"
-import ComponentsList from "../components/ComponentsList"
+import ComponentsListEdit from "../components/ComponentsListEdit"
 
 const modalStyle = {
   position: 'absolute',
@@ -128,7 +128,7 @@ const AllUserProductsPage = (props) => {
                             <Typography>
                                 Change components:
                             </Typography>
-                            <ComponentsList 
+                            <ComponentsListEdit 
                             key={product.id}
                             setCheckedComponents={setCheckedComponents}
                             product={product}/>

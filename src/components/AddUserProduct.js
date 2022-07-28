@@ -1,7 +1,7 @@
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Box, Button, Card, CardContent, IconButton, Modal, TextField, Typography} from "@mui/material"
 import { useState } from 'react'
-import ComponentsList from './ComponentsList'
+import ComponentsListAdd from './ComponentsListAdd'
 
 const style = {
     position: 'absolute',
@@ -70,7 +70,7 @@ const AddUserProduct = (props) => {
                             <Typography>
                                 Choose components:
                             </Typography>
-                            <ComponentsList 
+                            <ComponentsListAdd 
                             setCheckedComponents={setCheckedComponents}
                             product={product}/>
                             <Box mt={2}>
