@@ -6,6 +6,12 @@ const ComponentsListEdit = (props) => {
     const [checked, setChecked] = useState([])
     // already checked components = components from userProduct to edit
     const [componentsAlreadyChecked, setComponentsAlreadyChecked] = useState([])
+    
+    // for testing purpose first
+    const [arrayWithZeros, setArrayWithZeros] = useState(Array.from({ length: 8 }).fill(0))    
+
+    console.log("arraywith 0s: "+arrayWithZeros)
+
     const [userProductComponents, setUserProductComponents] = useState([])
 
     const [defaultComponents, setDefaultComponents] = useState([])
@@ -20,31 +26,42 @@ const ComponentsListEdit = (props) => {
       setDefaultComponents(response)
     },[response])
 
+    const [loadingUserProductComponents, setLoadingUserProductComponents] = useState(false)
+
     useEffect(() => {
-      setUserProductComponents(props.product.components)
+        setLoadingUserProductComponents(true)
+        setUserProductComponents(props.product.components)
+        setLoadingUserProductComponents(false)
     },[response])
 
-    useEffect(() => {
-        try {
-          if(props.product !== ''){
-            console.log("used effect")
-            // console.log("defCOmp.len: "+defaultComponents.length)
+    const [checkingProductComponents, setCheckingProductComponents] = useState(false)
+
+    //set all already chosen user product components
+    function setProductComponents(){
+        if(props.product !== ''){
             for(let i = 0; i <defaultComponents.length; i++){
                 for(let j=0; j<userProductComponents.length; j++){
-                    if(userProductComponents[j].name === defaultComponents[i].name)
-                    {
-                    setComponentsAlreadyChecked(userProductComponents[j])
-                    }
-                }
-            }
-            setChecked(componentsAlreadyChecked)
-          }
-        } catch (error) {
-          console.log(error)
-        }
-    },[])
+                    if(userProductComponents[j].name === defaultComponents[i].name){ 
+                    console.log("userProductComponents[j]: "+userProductComponents[j].id)    
+                    setComponentsAlreadyChecked(prev => [...prev, userProductComponents[j]])
+        }}} 
+    }}
 
-    
+    useEffect(() => {
+        // console.log("userProductComponents.length: "+userProductComponents.length)
+        setCheckingProductComponents(true)
+        setProductComponents()
+        setCheckingProductComponents(false)
+    },[response, loadingUserProductComponents])
+
+    useEffect(() => {
+        setChecked(componentsAlreadyChecked) 
+        console.log("componentsAlreadyChecked: "+componentsAlreadyChecked)
+    })
+
+    useEffect(() => {
+        console.log("checked: "+checked)
+    },[checked, checkingProductComponents])
 
     const handleToggle = (value) => {
         console.log("value-name: "+value.name)
