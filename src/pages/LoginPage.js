@@ -20,31 +20,32 @@ function LoginPage(props) {
   };
 
   const loginHandler = () => {
-    const enteredMail = email;
-    const enteredPassword = password;
-    const payload = {
-      email: enteredMail,
-      password: enteredPassword,
-    }
-    const requestOptions = {
-      method: "POST",
-      mode: "cors",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }
-    fetch(`${baseURL}/login`, requestOptions)
-    .then((response) => response.json())
-      .then((res) => {
-        if (res.status === "200") {
-          props.setIsLoggedIn(true);
-          navigate('/');
-          return true;
-        } else {
-          props.setIsLoggedIn(false);
-          return false;
-        }
-      })
+    navigate('/allProducts');
+    // const enteredMail = email;
+    // const enteredPassword = password;
+    // const payload = {
+    //   email: enteredMail,
+    //   password: enteredPassword,
+    // }
+    // const requestOptions = {
+    //   method: "POST",
+    //   mode: "cors",
+    //   credentials: "include",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(payload),
+    // }
+    // fetch(`${baseURL}/login`, requestOptions)
+    // .then((response) => response.json())
+    //   .then((res) => {
+    //     if (res.status === "200") {
+    //       props.setIsLoggedIn(true);
+    //       navigate('/');
+    //       return true;
+    //     } else {
+    //       props.setIsLoggedIn(false);
+    //       return false;
+    //     }
+    //   })
   }
 
   return (
