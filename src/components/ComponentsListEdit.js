@@ -6,11 +6,6 @@ const ComponentsListEdit = (props) => {
     const [checked, setChecked] = useState([])
     // already checked components = components from userProduct to edit
     const [componentsAlreadyChecked, setComponentsAlreadyChecked] = useState([])
-    
-    // for testing purpose first
-    // const [arrayWithZeros, setArrayWithZeros] = useState(Array.from({ length: 8 }).fill(0))    
-    // console.log("arraywith 0s: "+arrayWithZeros)
-
     const [userProductComponents, setUserProductComponents] = useState([])
 
     // 1. set default Components via get request
@@ -89,9 +84,8 @@ const ComponentsListEdit = (props) => {
         } else {
           newChecked.splice(currentIndex, 1)
         }
-        console.log("newChecked:" +newChecked)
-        // setChecked(prev => [...prev,newChecked])
-        console.log("Checked: "+checked)
+        // console.log("newChecked:" +newChecked)
+        // console.log("Checked: "+checked)
         props.setCheckedComponents(newChecked)
     }
 

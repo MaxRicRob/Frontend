@@ -22,7 +22,6 @@ const AddUserProduct = (props) => {
     const handleClose = () => setOpen(false)
     const [productName, setProductName] = useState()
     const [checkedComponents, setCheckedComponents] = useState([])
-    const [product,setProduct] = useState([])
 
     const handleNameInputChange = (e) =>{
         const enteredText = e.target.value
